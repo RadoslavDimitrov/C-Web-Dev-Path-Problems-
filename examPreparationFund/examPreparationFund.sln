@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "07.12.Nikulden’sCharity",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07.12.Nikulden'sMeals", "07.12.Nikulden'sMeals\07.12.Nikulden'sMeals.csproj", "{62DFE84A-E205-4A06-89CF-419091091E91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.12.MessageTranslator", "02.12.MessageTranslator\02.12.MessageTranslator.csproj", "{7AD4EC69-055F-41CA-B666-B11B710CE477}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{62DFE84A-E205-4A06-89CF-419091091E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62DFE84A-E205-4A06-89CF-419091091E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62DFE84A-E205-4A06-89CF-419091091E91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AD4EC69-055F-41CA-B666-B11B710CE477}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AD4EC69-055F-41CA-B666-B11B710CE477}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AD4EC69-055F-41CA-B666-B11B710CE477}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AD4EC69-055F-41CA-B666-B11B710CE477}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
