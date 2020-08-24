@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Transactions;
 
 namespace StackAndQueuesLab
 {
@@ -17,6 +18,14 @@ namespace StackAndQueuesLab
             }
 
             Console.WriteLine(reverseMe.ToArray());
+
+
+
+            //Simple example
+            //string input = Console.ReadLine();
+            //Stack<char> myStack = new Stack<char>(input.ToCharArray());
+
+            //Console.WriteLine(myStack.ToArray());
         }
     }
 }
