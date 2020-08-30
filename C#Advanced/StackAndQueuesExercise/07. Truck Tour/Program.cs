@@ -9,51 +9,32 @@ namespace _07._Truck_Tour
     {
         static void Main(string[] args)
         {
-            int numPompStation = int.Parse(Console.ReadLine());
+            decimal numOfStations = decimal.Parse(Console.ReadLine());
 
-            Queue<int> amountPetrol = new Queue<int>();
-            Queue<int> distance = new Queue<int>();
+            decimal startPomp = 0;
+            decimal fuelLeft = 0;
 
-            for (int i = 0; i < numPompStation; i++)
+            for (int i = 0; i < numOfStations; i++)
             {
-                int[] currPomp = Console.ReadLine().Split().Select(int.Parse).ToArray();
+                List<decimal> pair = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(decimal.Parse).ToList();
 
-                amountPetrol.Enqueue(currPomp[0]);
-                distance.Enqueue(currPomp[1]);
-            }
+                decimal petrol = pair[0];
+                decimal nextPomp = pair[1];
 
-            int indexCounter = 0;
-            int counter = numPompStation;
-            int left = 0;
+                fuelLeft += petrol;
 
-            while (true)
-            {
-                int currPetrol = amountPetrol.Dequeue();
-                int currDistance = distance.Dequeue();
-                
-                
-                if((left + currPetrol) - currDistance >= 0)
+                if(fuelLeft >= nextPomp)
                 {
-                    int currLeft = currPetrol - currDistance;
-                    left += currLeft;
-                    counter--;
-                    amountPetrol.Enqueue(currPetrol);
-                    distance.Enqueue(currDistance);
+                    fuelLeft -= nextPomp;
                 }
                 else
                 {
-                    indexCounter++;
-                    counter = numPompStation;
-                    amountPetrol.Enqueue(currPetrol);
-                    distance.Enqueue(currDistance);
-                }
-
-                if(counter == 0)
-                {
-                    Console.WriteLine(indexCounter);
-                    return;
+                    startPomp = i + 1;
+                    fuelLeft = 0;
                 }
             }
+
+            Console.WriteLine(startPomp);
         }
 
 
