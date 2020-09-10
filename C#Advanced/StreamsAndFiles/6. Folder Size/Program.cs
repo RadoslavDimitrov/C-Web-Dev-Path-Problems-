@@ -7,11 +7,22 @@ namespace _6._Folder_Size
     {
         static void Main(string[] args)
         {
-            string[] direct = Directory.GetFiles(Path.Combine("morve", "homeWorks"));
+            string path = Path.Combine(); //enter path
 
-            int size = 0;
+            string[] files = Directory.GetFiles(path);
 
-            
+            double size = 0;
+
+            foreach (string item in files)
+            {
+                FileInfo fileInfo = new FileInfo(item);
+
+                size += fileInfo.Length;
+            }
+
+            size = size / 1024 / 1024;
+
+            Console.WriteLine(size);
         }
     }
 }
