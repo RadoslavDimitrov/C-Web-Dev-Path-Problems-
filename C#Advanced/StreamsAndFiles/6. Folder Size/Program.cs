@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.IO.Compression;
 
 namespace _6._Folder_Size
 {
@@ -17,12 +18,16 @@ namespace _6._Folder_Size
             {
                 FileInfo fileInfo = new FileInfo(item);
 
+                
                 size += fileInfo.Length;
             }
 
             size = size / 1024 / 1024;
 
             Console.WriteLine(size);
+
+
+            
         }
     }
 }
