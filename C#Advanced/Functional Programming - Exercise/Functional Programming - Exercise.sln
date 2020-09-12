@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functional Programming - Ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02. Knights of Honor", "02. Knights of Honor\02. Knights of Honor.csproj", "{EF2F9965-8221-4406-AFAF-DAF40171490E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03. Custom Min Function", "03. Custom Min Function\03. Custom Min Function.csproj", "{58617C62-70BC-4004-870F-E9D044EA7B73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04. Find Evens or Odds", "04. Find Evens or Odds\04. Find Evens or Odds.csproj", "{B3F25635-AB31-4EE7-AC58-6133CDE8A5A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{EF2F9965-8221-4406-AFAF-DAF40171490E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF2F9965-8221-4406-AFAF-DAF40171490E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF2F9965-8221-4406-AFAF-DAF40171490E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58617C62-70BC-4004-870F-E9D044EA7B73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58617C62-70BC-4004-870F-E9D044EA7B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58617C62-70BC-4004-870F-E9D044EA7B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58617C62-70BC-4004-870F-E9D044EA7B73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3F25635-AB31-4EE7-AC58-6133CDE8A5A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3F25635-AB31-4EE7-AC58-6133CDE8A5A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3F25635-AB31-4EE7-AC58-6133CDE8A5A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3F25635-AB31-4EE7-AC58-6133CDE8A5A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
