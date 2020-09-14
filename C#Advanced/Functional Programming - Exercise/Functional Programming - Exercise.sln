@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functional Programming - Exercise", "Functional Programming - Exercise\Functional Programming - Exercise.csproj", "{E0CC7645-E9FB-48A3-9CC0-3B82148CDAFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Functional Programming - Exercise", "Functional Programming - Exercise\Functional Programming - Exercise.csproj", "{E0CC7645-E9FB-48A3-9CC0-3B82148CDAFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02. Knights of Honor", "02. Knights of Honor\02. Knights of Honor.csproj", "{EF2F9965-8221-4406-AFAF-DAF40171490E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02. Knights of Honor", "02. Knights of Honor\02. Knights of Honor.csproj", "{EF2F9965-8221-4406-AFAF-DAF40171490E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03. Custom Min Function", "03. Custom Min Function\03. Custom Min Function.csproj", "{58617C62-70BC-4004-870F-E9D044EA7B73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03. Custom Min Function", "03. Custom Min Function\03. Custom Min Function.csproj", "{58617C62-70BC-4004-870F-E9D044EA7B73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04. Find Evens or Odds", "04. Find Evens or Odds\04. Find Evens or Odds.csproj", "{B3F25635-AB31-4EE7-AC58-6133CDE8A5A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04. Find Evens or Odds", "04. Find Evens or Odds\04. Find Evens or Odds.csproj", "{B3F25635-AB31-4EE7-AC58-6133CDE8A5A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05. Applied Arithmetics", "05. Applied Arithmetics\05. Applied Arithmetics.csproj", "{C88C4BA3-F5B5-4CA8-9954-B0668C79D439}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "05. Applied Arithmetics", "05. Applied Arithmetics\05. Applied Arithmetics.csproj", "{C88C4BA3-F5B5-4CA8-9954-B0668C79D439}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06. Reverse And Exclude", "06. Reverse And Exclude\06. Reverse And Exclude.csproj", "{14C3B5EF-C337-4F7E-B2C4-5C03E2171BD9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C88C4BA3-F5B5-4CA8-9954-B0668C79D439}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C88C4BA3-F5B5-4CA8-9954-B0668C79D439}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C88C4BA3-F5B5-4CA8-9954-B0668C79D439}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14C3B5EF-C337-4F7E-B2C4-5C03E2171BD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14C3B5EF-C337-4F7E-B2C4-5C03E2171BD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14C3B5EF-C337-4F7E-B2C4-5C03E2171BD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14C3B5EF-C337-4F7E-B2C4-5C03E2171BD9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
