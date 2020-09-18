@@ -39,5 +39,9 @@ namespace DefiningClasses
 			set { name = value; }
 		}
 
+		public override string ToString()
+		{
+			return $"{this.Name} {this.Age}";
+		}
 	}
 }
