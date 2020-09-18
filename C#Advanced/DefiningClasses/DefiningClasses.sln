@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefiningClasses", "DefiningClasses\DefiningClasses.csproj", "{B58D991F-FD0E-4CC2-89BD-43AFDEB8B63A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefiningClasses", "DefiningClasses\DefiningClasses.csproj", "{B58D991F-FD0E-4CC2-89BD-43AFDEB8B63A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DateModifier", "DateModifier\DateModifier.csproj", "{AB78B8E0-273D-4046-95AC-3B78FA2B2F6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B58D991F-FD0E-4CC2-89BD-43AFDEB8B63A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B58D991F-FD0E-4CC2-89BD-43AFDEB8B63A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B58D991F-FD0E-4CC2-89BD-43AFDEB8B63A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB78B8E0-273D-4046-95AC-3B78FA2B2F6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB78B8E0-273D-4046-95AC-3B78FA2B2F6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB78B8E0-273D-4046-95AC-3B78FA2B2F6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB78B8E0-273D-4046-95AC-3B78FA2B2F6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

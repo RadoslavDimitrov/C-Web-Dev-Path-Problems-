@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace DefiningClasses
 {
@@ -8,7 +11,7 @@ namespace DefiningClasses
         {
             int n = int.Parse(Console.ReadLine());
 
-            Family family = new Family();
+            List<Person> people = new List<Person>();
 
             for (int i = 0; i < n; i++)
             {
@@ -16,14 +19,12 @@ namespace DefiningClasses
 
                 Person person = new Person(int.Parse(currInput[1]), currInput[0]);
 
-                family.AddMember(person);
+                people.Add(person);
             }
 
-            var oldest = family.GetGetOldestMember();
+            people = people.Where(x => x.Age > 30).OrderBy(x => x.Name).ToList();
 
-            Console.WriteLine(oldest);
-
-            
+            Console.WriteLine(string.Join(Environment.NewLine, people));
         }
     }
 }
