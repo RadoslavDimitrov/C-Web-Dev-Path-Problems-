@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefiningClasses", "Defining
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DateModifier", "DateModifier\DateModifier.csproj", "{AB78B8E0-273D-4046-95AC-3B78FA2B2F6A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P06.SpeedRacing", "P06.SpeedRacing\P06.SpeedRacing.csproj", "{E83123A5-4B18-4A31-B360-1C1B2856B404}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P07.RawData", "P07.RawData\P07.RawData.csproj", "{7B92FC1C-229F-4E8F-8005-56448AA8DE07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{AB78B8E0-273D-4046-95AC-3B78FA2B2F6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB78B8E0-273D-4046-95AC-3B78FA2B2F6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB78B8E0-273D-4046-95AC-3B78FA2B2F6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E83123A5-4B18-4A31-B360-1C1B2856B404}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E83123A5-4B18-4A31-B360-1C1B2856B404}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E83123A5-4B18-4A31-B360-1C1B2856B404}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E83123A5-4B18-4A31-B360-1C1B2856B404}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B92FC1C-229F-4E8F-8005-56448AA8DE07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B92FC1C-229F-4E8F-8005-56448AA8DE07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B92FC1C-229F-4E8F-8005-56448AA8DE07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B92FC1C-229F-4E8F-8005-56448AA8DE07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
