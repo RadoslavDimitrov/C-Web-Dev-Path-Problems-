@@ -8,8 +8,7 @@ namespace DefiningClasses
         {
             Person person = new Person();
 
-            person.Age = 18;
-            person.Name = "Pesho";
+            
         }
     }
 }
