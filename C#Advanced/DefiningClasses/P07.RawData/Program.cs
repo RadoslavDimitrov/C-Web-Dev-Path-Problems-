@@ -23,18 +23,18 @@ namespace P07.RawData
                 //{tire3Pressure} {tire3Age} {tire4Pressure} {tire4Age}"
 
                 string model = input[0];
-                double engineSpeed = double.Parse(input[1]);
-                double enginePower = double.Parse(input[2]);
-                double cargoWeight = double.Parse(input[3]);
+                int engineSpeed = int.Parse(input[1]);
+                int enginePower = int.Parse(input[2]);
+                int cargoWeight = int.Parse(input[3]);
                 string cargoType = input[4];
                 double tire1Pressure = double.Parse(input[5]);
-                double tire1Age = double.Parse(input[6]);
+                int tire1Age = int.Parse(input[6]);
                 double tire2Pressure = double.Parse(input[7]);
-                double tire2Age = double.Parse(input[8]);
+                int tire2Age = int.Parse(input[8]);
                 double tire3Pressure = double.Parse(input[9]);
-                double tire3Age = double.Parse(input[10]);
+                int tire3Age = int.Parse(input[10]);
                 double tire4Pressure = double.Parse(input[11]);
-                double tire4Age = double.Parse(input[12]);
+                int tire4Age = int.Parse(input[12]);
 
                 Car currCar = new Car(model, engineSpeed, enginePower, cargoWeight, cargoType
                     , tire1Age, tire1Pressure, tire2Age, tire2Pressure, tire3Age, tire3Pressure
@@ -48,13 +48,14 @@ namespace P07.RawData
             switch (command)
             {
                 case "fragile":
-                   carList = carList.Where(x => x.Cargo.CargoType == "fragile")
-                        .Where(x => x.GetAveragePressure() < 1)
+                    carList = carList.Where(x => x.Cargo.CargoType == "fragile")
+                         //.Where(x => x.GetAveragePressure() < 1)
+                         .Where(x => x.isLowerThanOnePressure() == true)
                         .ToList();
                     break;
                 case "flamable":
                     carList = carList.Where(x => x.Cargo.CargoType == "flamable")
-                        .Where(z => z.Engine.EnginePower > 250)
+                        .Where(x => x.Engine.EnginePower > 250)
                         .ToList();
                     break;
 

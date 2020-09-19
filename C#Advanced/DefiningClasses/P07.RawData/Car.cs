@@ -19,11 +19,11 @@ namespace P07.RawData
 		//"{model} {engineSpeed} {enginePower} {cargoWeight} {cargoType}
 		//{tire1Pressure} {tire1Age} {tire2Pressure} {tire2Age}
 		//{tire3Pressure} {tire3Age} {tire4Pressure} {tire4Age}"
-		public Car(string model, double engineSpeed, double enginePower, double cargoWeight
-			,string cargoType, double tire1Age, double tire1Pressure
-			,double tire2Age, double tire2Pressure
-			,double tire3Age, double tire3Pressure
-			,double tire4Age, double tire4Pressure)
+		public Car(string model, int engineSpeed, int enginePower, int cargoWeight
+			,string cargoType, int tire1Age, double tire1Pressure
+			,int tire2Age, double tire2Pressure
+			,int tire3Age, double tire3Pressure
+			,int tire4Age, double tire4Pressure)
 		{
 			this.Model = model;
 			this.Engine = new Engine(engineSpeed, enginePower);
@@ -71,6 +71,21 @@ namespace P07.RawData
 			double result = (this.tires[0].Pressure + this.tires[1].Pressure 
 				+ this.tires[2].Pressure + this.tires[3].Pressure) / 4;
 			return result;
+		}
+
+		public bool isLowerThanOnePressure()
+		{
+			bool isLower = false;
+
+			if(this.tires[0].Pressure < 1 ||
+				this.tires[1].Pressure < 1||
+				this.tires[2].Pressure < 1 ||
+				this.tires[3].Pressure < 1)
+			{
+				isLower = true;
+			}
+
+			return isLower;
 		}
 
 		public override string ToString()

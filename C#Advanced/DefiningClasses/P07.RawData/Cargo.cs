@@ -6,11 +6,11 @@ namespace P07.RawData
 {
     public class Cargo
     {
-		private double cargoWeight;
+		private int cargoWeight;
 
 		private string cargoType;
 
-		public Cargo(double weight, string type)
+		public Cargo(int weight, string type)
 		{
 			this.cargoWeight = weight;
 			this.CargoType = type;
@@ -23,7 +23,7 @@ namespace P07.RawData
 		}
 
 
-		public double CargoWeight
+		public int CargoWeight
 		{
 			get { return cargoWeight; }
 			set { cargoWeight = value; }

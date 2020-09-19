@@ -6,23 +6,23 @@ namespace P07.RawData
 {
     public class Engine
     {
-		private double engineSpeed;
+		private int engineSpeed;
 
-		private double enginePower;
+		private int enginePower;
 
-		public Engine(double speed, double power)
+		public Engine(int speed, int power)
 		{
 			this.EngineSpeed = speed;
 			this.enginePower = power;
 		}
-		public double EnginePower
+		public int EnginePower
 		{
 			get { return enginePower; }
 			set { enginePower = value; }
 		}
 
 
-		public double EngineSpeed
+		public int EngineSpeed
 		{
 			get { return engineSpeed; }
 			set { engineSpeed = value; }

@@ -8,14 +8,14 @@ namespace P07.RawData
     {
 		private double pressure;
 
-		private double tireAge;
+		private int tireAge;
 
-		public Tire(double pressure, double age)
+		public Tire(double pressure, int age)
 		{
 			this.Pressure = pressure;
 			this.TireAge = age;
 		}
-		public double TireAge
+		public int TireAge
 		{
 			get { return tireAge; }
 			set { tireAge = value; }
