@@ -9,7 +9,7 @@ namespace P4.CopyBinaryFile
     {
         static void Main(string[] args)
         {
-            using var reader = new FileStream("picture.png", FileMode.OpenOrCreate);
+            using var reader = new FileStream("copyMe.png", FileMode.OpenOrCreate);
             using var writer = new FileStream("./pictureCopy.png", FileMode.OpenOrCreate);
 
             byte[] buffer = new byte[4096];
