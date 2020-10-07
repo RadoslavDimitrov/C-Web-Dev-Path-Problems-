@@ -51,6 +51,8 @@ namespace P5.ComparingObjects
             {
                 Console.WriteLine($"{equalPersons} {notEqualPersons} {personData.Count}");
             }
+
+         
             
 
             //Console.WriteLine(p1.CompareTo(p3)); // 1 - p1 is bigger than p3
