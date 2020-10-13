@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubParty", "ExamPreparationCSharpAdvanced24Feb2019\ClubParty.csproj", "{831BFDB8-F04A-4AD6-8251-784FFDB1BA78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClubParty", "ExamPreparationCSharpAdvanced24Feb2019\ClubParty.csproj", "{831BFDB8-F04A-4AD6-8251-784FFDB1BA78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P2TronRacers", "P2TronRacers\P2TronRacers.csproj", "{82151463-8DBA-4B5D-A927-F150F9FF50D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heroes", "Heroes\Heroes.csproj", "{31DC9CE5-4C52-423B-B626-098B29E9A466}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{831BFDB8-F04A-4AD6-8251-784FFDB1BA78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{831BFDB8-F04A-4AD6-8251-784FFDB1BA78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{831BFDB8-F04A-4AD6-8251-784FFDB1BA78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82151463-8DBA-4B5D-A927-F150F9FF50D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82151463-8DBA-4B5D-A927-F150F9FF50D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82151463-8DBA-4B5D-A927-F150F9FF50D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82151463-8DBA-4B5D-A927-F150F9FF50D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31DC9CE5-4C52-423B-B626-098B29E9A466}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31DC9CE5-4C52-423B-B626-098B29E9A466}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31DC9CE5-4C52-423B-B626-098B29E9A466}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31DC9CE5-4C52-423B-B626-098B29E9A466}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
