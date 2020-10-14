@@ -17,7 +17,7 @@ namespace P2Snake
 
             bool isLive = true;
             int foodQuantity = 0;
-
+            bool haveFoodLeft;
             while (isLive)
             {
                 if (foodQuantity == 10)
@@ -39,6 +39,12 @@ namespace P2Snake
                     {
                         foodQuantity++;
                         snakePosition = MoveUp(matrix, snakePosition);
+                        haveFoodLeft = HaveFood(matrix);
+                        if(haveFoodLeft == false)
+                        {
+                            isLive = false;
+                            continue;
+                        }
                     }
                     else if (matrix[snakePosition.Key - 1, snakePosition.Value] == "B")
                     {
@@ -65,6 +71,12 @@ namespace P2Snake
                     {
                         foodQuantity++;
                         snakePosition = MoveDown(matrix, snakePosition);
+                        haveFoodLeft = HaveFood(matrix);
+                        if (haveFoodLeft == false)
+                        {
+                            isLive = false;
+                            continue;
+                        }
                     }
                     else if (matrix[snakePosition.Key + 1, snakePosition.Value] == "B")
                     {
@@ -90,6 +102,12 @@ namespace P2Snake
                     {
                         foodQuantity++;
                         snakePosition = MoveLeft(matrix, snakePosition);
+                        haveFoodLeft = HaveFood(matrix);
+                        if (haveFoodLeft == false)
+                        {
+                            isLive = false;
+                            continue;
+                        }
                     }
                     else if (matrix[snakePosition.Key, snakePosition.Value - 1] == "B")
                     {
@@ -115,6 +133,12 @@ namespace P2Snake
                     {
                         foodQuantity++;
                         snakePosition = MoveRight(matrix, snakePosition);
+                        haveFoodLeft = HaveFood(matrix);
+                        if (haveFoodLeft == false)
+                        {
+                            isLive = false;
+                            continue;
+                        }
                     }
                     else if (matrix[snakePosition.Key, snakePosition.Value + 1] == "B")
                     {
@@ -145,6 +169,21 @@ namespace P2Snake
             PrintMatrix(matrix);
         }
 
+        private static bool HaveFood(string[,] matrix)
+        {
+            for (int row = 0; row < matrix.GetLength(0); row++)
+            {
+                for (int col = 0; col < matrix.GetLength(1); col++)
+                {
+                    if(matrix[row,col] == "*")
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
         private static void PrintMatrix(string[,] matrix)
         {
             StringBuilder sb = new StringBuilder();
