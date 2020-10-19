@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSHarpAdvancedExam-22Feb2020", "CSHarpAdvancedExam-22Feb2020\CSHarpAdvancedExam-22Feb2020.csproj", "{023AC784-67BD-4E6F-B607-07E51C131580}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSHarpAdvancedExam-22Feb2020", "CSHarpAdvancedExam-22Feb2020\CSHarpAdvancedExam-22Feb2020.csproj", "{023AC784-67BD-4E6F-B607-07E51C131580}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P2Re-Volt", "P2Re-Volt\P2Re-Volt.csproj", "{6000912A-8A8E-4CDA-8DCB-93161C2ADF9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P2Re-Volt", "P2Re-Volt\P2Re-Volt.csproj", "{6000912A-8A8E-4CDA-8DCB-93161C2ADF9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Guild", "Guild\Guild.csproj", "{8FBD8200-AF27-4F01-B00C-D7747B5ED34C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6000912A-8A8E-4CDA-8DCB-93161C2ADF9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6000912A-8A8E-4CDA-8DCB-93161C2ADF9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6000912A-8A8E-4CDA-8DCB-93161C2ADF9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FBD8200-AF27-4F01-B00C-D7747B5ED34C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FBD8200-AF27-4F01-B00C-D7747B5ED34C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FBD8200-AF27-4F01-B00C-D7747B5ED34C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FBD8200-AF27-4F01-B00C-D7747B5ED34C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
