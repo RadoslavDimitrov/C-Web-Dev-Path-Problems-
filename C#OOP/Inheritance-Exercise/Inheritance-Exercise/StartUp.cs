@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Inheritance_Exercise
+namespace Person
 {
-    class Program
+    class StartUp
     {
         static void Main(string[] args)
         {
