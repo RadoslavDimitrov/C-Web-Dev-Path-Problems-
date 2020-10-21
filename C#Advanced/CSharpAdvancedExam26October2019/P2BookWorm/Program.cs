@@ -20,8 +20,44 @@ namespace P2BookWorm
 
             Player player = new Player(playerPos.Key, playerPos.Value, initialStr);
 
-            string command;
+            //ConsoleKeyInfo command;
 
+            //Console.WriteLine("Use arrows to move or press ENTER to ESC");
+            //Console.WriteLine();
+            //Console.WriteLine();
+            //Console.WriteLine("");
+
+            //string currCommand = string.Empty;
+            //var keyCommand = Console.ReadKey();
+
+
+            //while (keyCommand.Key != ConsoleKey.Enter)
+            //{
+            //    currCommand = TransferKeyInfoToStringCommand(currCommand, keyCommand);
+
+            //    matrix[player.Row, player.Col] = '-';
+
+            //    player.Move(currCommand, matrix);
+
+            //    if (matrix[player.Row, player.Col] != '-')
+            //    {
+            //        player.Consume(ref matrix[player.Row, player.Col], ref matrix);
+            //    }
+
+            //    matrix[player.Row, player.Col] = 'P';
+
+            //    Console.Clear();
+            //    Console.WriteLine(PrintMatrix(matrix));
+
+            //    Console.WriteLine();
+            //    Console.WriteLine();
+            //    Console.WriteLine();
+            //    Console.WriteLine();
+            //    Console.WriteLine("Use arrows to move or press ENTER to ESC");
+
+            //    keyCommand = Console.ReadKey();
+            //}
+            string command;
 
             while ((command = Console.ReadLine()).ToLower() != "end")
             {
@@ -29,16 +65,41 @@ namespace P2BookWorm
 
                 player.Move(command, matrix);
 
-                if(matrix[player.Row, player.Col] != '-')
+                if (matrix[player.Row, player.Col] != '-')
                 {
                     player.Consume(ref matrix[player.Row, player.Col], ref matrix);
                 }
+
+
+
             }
 
             matrix[player.Row, player.Col] = 'P';
 
             Console.WriteLine(player.InitialStr);
             Console.WriteLine(PrintMatrix(matrix));
+        }
+
+        private static string TransferKeyInfoToStringCommand(string currCommand, ConsoleKeyInfo keyCommand)
+        {
+            if (keyCommand.Key == ConsoleKey.UpArrow)
+            {
+                currCommand = "up";
+            }
+            else if (keyCommand.Key == ConsoleKey.DownArrow)
+            {
+                currCommand = "down";
+            }
+            else if (keyCommand.Key == ConsoleKey.LeftArrow)
+            {
+                currCommand = "left";
+            }
+            else if (keyCommand.Key == ConsoleKey.RightArrow)
+            {
+                currCommand = "right";
+            }
+
+            return currCommand;
         }
 
         public static string PrintMatrix(char[,] matrix)
