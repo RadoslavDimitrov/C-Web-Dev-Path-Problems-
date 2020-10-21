@@ -16,16 +16,20 @@ namespace Person
 		}
 		public int Age
 		{
-			get { return age; }
-			set 
+			get
 			{
-				if(value > 0)
+				return this.age;
+			}
+			set
+			{
+				if(value >= 0)
 				{
-					age = value;
+					this.age = value;
 				}
-				
 			}
 		}
+		
+
 
 		public string Name
 		{
@@ -35,11 +39,7 @@ namespace Person
 
 		public override string ToString()
 		{
-			StringBuilder sb = new StringBuilder();
-
-			sb.Append(String.Format("Name: {0}, age: {1}", this.Name, this.Age));
-
-			return sb.ToString();
+			return $"Name: {this.Name}, Age: {this.Age}";
 		}
 	}
 }

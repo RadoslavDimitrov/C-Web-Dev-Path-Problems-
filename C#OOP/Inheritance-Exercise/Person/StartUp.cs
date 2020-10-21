@@ -2,14 +2,19 @@
 
 namespace Person
 {
-    class StartUp
+    public class StartUp
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Person person = new Person("pesho", -2);
-            Console.WriteLine(person);
-            Child ch = new Child("goshko", 16);
-            Console.WriteLine(ch);
+            string name = Console.ReadLine();
+
+            int age = int.Parse(Console.ReadLine());
+
+
+
+            Child child = new Child(name, age);
+
+            Console.WriteLine(child);
         }
     }
 }
