@@ -1,4 +1,6 @@
-﻿namespace PlayersAndMonsters
+﻿
+
+namespace PlayersAndMonsters
 {
     public class StartUp
     {
