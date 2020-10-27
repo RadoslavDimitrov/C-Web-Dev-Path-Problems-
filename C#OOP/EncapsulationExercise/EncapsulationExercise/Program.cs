@@ -22,6 +22,7 @@ namespace EncapsulationExercise
                 Console.WriteLine($"Surface Area - {boxSA:F2}");
                 Console.WriteLine($"Lateral Surface Area - {boxLSA:F2}");
                 Console.WriteLine($"Volume - {boxVolume:F2}");
+
             }
 
         }
