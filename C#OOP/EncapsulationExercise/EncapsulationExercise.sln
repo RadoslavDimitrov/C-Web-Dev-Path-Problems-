@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EncapsulationExercise", "En
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimalFarm", "AnimalFarm\AnimalFarm.csproj", "{AE968E9B-7DBF-4F08-A280-1A061269EAC8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P3ShoppingSpree", "P3ShoppingSpree\P3ShoppingSpree.csproj", "{3C80A1CD-033B-49F9-92ED-7F94AF1372C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AE968E9B-7DBF-4F08-A280-1A061269EAC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE968E9B-7DBF-4F08-A280-1A061269EAC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE968E9B-7DBF-4F08-A280-1A061269EAC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C80A1CD-033B-49F9-92ED-7F94AF1372C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C80A1CD-033B-49F9-92ED-7F94AF1372C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C80A1CD-033B-49F9-92ED-7F94AF1372C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C80A1CD-033B-49F9-92ED-7F94AF1372C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
