@@ -21,13 +21,13 @@ namespace P4PizzaCalories
             switch (this.toppingType.ToLower())
             {
                 case "meat":
-                    return 2 * meatModifier;
+                    return 2 * meatModifier * this.weight;
                  case "veggies":
-                    return 2 * veggiesModifier;
+                    return 2 * veggiesModifier * this.weight;
                 case "cheese":
-                    return 2 * cheeseModifier;
+                    return 2 * cheeseModifier * this.weight;
                 case "sauce":
-                    return 2 * sauceModifier;
+                    return 2 * sauceModifier * this.weight;
                 default:
                     return 0;
                     break;
@@ -39,13 +39,13 @@ namespace P4PizzaCalories
             this.ToppingType = type;
             this.Weight = weight;
         }
-        internal string ToppingType
+        public string ToppingType
         {
             
             set 
             {
-                if(!(value.ToLower() == "meat" || value.ToLower() == "veggies"
-                    || value.ToLower() == "cheese" || value.ToLower() == "sauce"))
+                if(value.ToLower() != "meat" && value.ToLower() != "veggies"
+                    && value.ToLower() != "cheese" && value.ToLower() != "sauce")
                 {
                     throw new ArgumentException($"Cannot place {value} on top of your pizza.");
                 }
@@ -54,7 +54,7 @@ namespace P4PizzaCalories
             }
         }
 
-        internal double Weight
+        public double Weight
         {
 
             set 

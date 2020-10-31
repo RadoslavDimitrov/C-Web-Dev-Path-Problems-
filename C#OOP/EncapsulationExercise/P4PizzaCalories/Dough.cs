@@ -23,7 +23,7 @@ namespace P4PizzaCalories
             this.Weight = weight;
         }
 
-        internal double Weight
+        public double Weight
         {
             set
             {
@@ -35,11 +35,11 @@ namespace P4PizzaCalories
                 this.weight = value;
             }
         }
-        internal string FlourType
+        public string FlourType
         {
             set
             {
-                if (!(value == "White" || value == "Wholegrain"))
+                if (value.ToLower() != "white" && value.ToLower() != "wholegrain")
                 {
                     throw new ArgumentException("Invalid type of dough.");
                 }
@@ -48,11 +48,11 @@ namespace P4PizzaCalories
             }
         }
 
-        internal string BakingTechnique
+        public string BakingTechnique
         {
             set
             {
-                if (!(value == "Crispy" || value == "Chewy" || value == "Homemade"))
+                if (value.ToLower() != "crispy" && value.ToLower() != "chewy" && value.ToLower() != "homemade")
                 {
                     throw new ArgumentException("Invalid type of dough.");
                 }
@@ -60,11 +60,11 @@ namespace P4PizzaCalories
                 this.bakingTechnique = value;
             }
         }
-        public double CallPerGram => GetCalloriesPerGram();
+        public double CallPerGram => GetCallories();
 
         private double GetFlourModifier() // "white" , "wholegrain"
         {
-            if (this.flourType == "White")
+            if (this.flourType.ToLower() == "white")
             {
                 return 1.5;
             }
@@ -76,11 +76,11 @@ namespace P4PizzaCalories
 
         private double GetBakingModifier()  //crispy, chewy or homemade
         {
-            if (this.bakingTechnique == "Crispy")
+            if (this.bakingTechnique.ToLower() == "crispy")
             {
                 return 0.9;
             }
-            else if (this.bakingTechnique == "Chewy")
+            else if (this.bakingTechnique.ToLower() == "chewy")
             {
                 return 1.1;
             }
