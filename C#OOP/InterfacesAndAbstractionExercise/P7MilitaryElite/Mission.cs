@@ -8,17 +8,22 @@ namespace P7MilitaryElite
     {
         private List<string> stateList = new List<string>()
         {
-            "inprogress",
+            "inProgress",
             "finished"
         };
         private string state;
 
+        public Mission(string codeName, string state)
+        {
+            this.State = state;
+            this.CodeName = codeName;
+        }
         public string State
         {
             get { return state; }
             set 
             {
-                if (!stateList.Contains(value.ToLower()))
+                if (!stateList.Contains(value))
                 {
                     throw new ArgumentException("Invalid Mission State");
                 }

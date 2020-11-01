@@ -15,8 +15,11 @@ namespace P7MilitaryElite
 
         public override string ToString()
         {
-            return $"Name: {this.FirstName} {this.LastName} Id: {this.Id}" + Environment.NewLine
-                  + $"Code Number: {this.CodeNumber}";
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine($"Name: {this.FirstName} {this.LastName} Id: {this.Id}");
+            sb.AppendLine($"Code Number: {this.CodeNumber}");
+            return sb.ToString().TrimEnd();
 
         }
     }

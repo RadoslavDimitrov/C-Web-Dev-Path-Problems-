@@ -32,7 +32,7 @@ namespace P7MilitaryElite
                 sb.AppendLine(item.ToString());
             }
 
-            return sb.ToString().Trim();
+            return sb.ToString().TrimEnd();
         }
     }
 }

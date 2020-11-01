@@ -15,6 +15,10 @@ namespace P7MilitaryElite
             this.list = new List<Mission>();
         }
 
+        public void AddMission(Mission mission)
+        {
+            this.list.Add(mission);
+        }
         public void CompleteMission(Mission mission)
         {
             var currMission = this.list.FirstOrDefault(x => x.CodeName == mission.CodeName);
@@ -33,12 +37,14 @@ namespace P7MilitaryElite
             sb.AppendLine($"Corps: {this.Corps}");
             sb.AppendLine("Missions:");
 
-            foreach (var item in list)
+            var missionInProgress = this.list.Where(x => x.State == "inProgress");
+
+            foreach (var item in missionInProgress)
             {
                 sb.AppendLine(item.ToString());
             }
 
-            return sb.ToString().Trim();
+            return sb.ToString().TrimEnd();
         }
     }
 }

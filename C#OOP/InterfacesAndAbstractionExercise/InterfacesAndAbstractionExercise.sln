@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonInfo", "PersonInfo\PersonInfo.csproj", "{EBD8B5CF-0106-42A5-A9E3-2FAAEA2D6DCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonInfo", "PersonInfo\PersonInfo.csproj", "{EBD8B5CF-0106-42A5-A9E3-2FAAEA2D6DCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P3Telephony", "P3Telephony\P3Telephony.csproj", "{4AAC8587-73A8-4452-90B5-882FECA87043}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P3Telephony", "P3Telephony\P3Telephony.csproj", "{4AAC8587-73A8-4452-90B5-882FECA87043}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P4BorderControl", "P4BorderControl\P4BorderControl.csproj", "{C842F988-5822-495A-8BA5-2B7636DB1AF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P4BorderControl", "P4BorderControl\P4BorderControl.csproj", "{C842F988-5822-495A-8BA5-2B7636DB1AF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P5BirthdayCelebrations", "P5BirthdayCelebrations\P5BirthdayCelebrations.csproj", "{C432EE9B-BE30-4532-A454-C6941A3733C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P5BirthdayCelebrations", "P5BirthdayCelebrations\P5BirthdayCelebrations.csproj", "{C432EE9B-BE30-4532-A454-C6941A3733C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P6FoodShortage", "P6FoodShortage\P6FoodShortage.csproj", "{2B725090-F1C9-4310-ACF9-D1A2C80CE7B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P6FoodShortage", "P6FoodShortage\P6FoodShortage.csproj", "{2B725090-F1C9-4310-ACF9-D1A2C80CE7B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P7MilitaryElite", "P7MilitaryElite\P7MilitaryElite.csproj", "{879FB023-A17F-480E-8363-238EBB974827}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MilitaryElite", "MilitaryElite\MilitaryElite.csproj", "{1149071B-C953-4590-9867-2700CD5364A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{2B725090-F1C9-4310-ACF9-D1A2C80CE7B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B725090-F1C9-4310-ACF9-D1A2C80CE7B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B725090-F1C9-4310-ACF9-D1A2C80CE7B1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{879FB023-A17F-480E-8363-238EBB974827}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{879FB023-A17F-480E-8363-238EBB974827}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{879FB023-A17F-480E-8363-238EBB974827}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{879FB023-A17F-480E-8363-238EBB974827}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1149071B-C953-4590-9867-2700CD5364A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1149071B-C953-4590-9867-2700CD5364A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1149071B-C953-4590-9867-2700CD5364A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1149071B-C953-4590-9867-2700CD5364A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

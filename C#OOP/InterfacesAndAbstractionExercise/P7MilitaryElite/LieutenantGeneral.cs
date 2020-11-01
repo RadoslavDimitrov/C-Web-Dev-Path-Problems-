@@ -24,13 +24,14 @@ namespace P7MilitaryElite
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine($"Name: {this.FirstName} {this.LastName} Id: {this.Id} Salary: {this.Salary:F2}");
+            sb.AppendLine($"Privates:");
 
             foreach (var item in list)
             {
                 sb.AppendLine(item.ToString());
             }
 
-            return sb.ToString().Trim();
+            return sb.ToString().TrimEnd();
         }
     }
 }

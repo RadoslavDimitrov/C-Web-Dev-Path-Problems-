@@ -9,7 +9,7 @@ namespace P7MilitaryElite
     {
         private readonly Dictionary<string, string> corpsDict = new Dictionary<string, string>
         {
-                {"airforces", "airforces"},
+                {"Airforces", "Airforces"},
                 {"Marines", "Marines"}
         };
 
@@ -22,7 +22,7 @@ namespace P7MilitaryElite
             }
             set
             {
-                if (!corpsDict.ContainsKey(value.ToLower()))
+                if (!corpsDict.ContainsKey(value))
                 {
                     throw new ArgumentException("invalid corps");
                 }
