@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolymorphismExercise", "PolymorphismExercise\PolymorphismExercise.csproj", "{655070AF-045A-437E-8218-0C512DFA11DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P2VehiclesExtension", "P2VehiclesExtension\P2VehiclesExtension.csproj", "{F9963F1A-B864-41D6-8909-FC7CACE14C48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P2VehiclesExtension", "P2VehiclesExtension\P2VehiclesExtension.csproj", "{F9963F1A-B864-41D6-8909-FC7CACE14C48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P3Raiding", "P3Raiding\P3Raiding.csproj", "{2A218590-01FA-4966-8FC2-0A2CC18B7DBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P4WildFarm", "P4WildFarm\P4WildFarm.csproj", "{15AD089B-B5AD-484A-A512-C1B2332A8D2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{F9963F1A-B864-41D6-8909-FC7CACE14C48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9963F1A-B864-41D6-8909-FC7CACE14C48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9963F1A-B864-41D6-8909-FC7CACE14C48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A218590-01FA-4966-8FC2-0A2CC18B7DBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A218590-01FA-4966-8FC2-0A2CC18B7DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A218590-01FA-4966-8FC2-0A2CC18B7DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A218590-01FA-4966-8FC2-0A2CC18B7DBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15AD089B-B5AD-484A-A512-C1B2332A8D2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15AD089B-B5AD-484A-A512-C1B2332A8D2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15AD089B-B5AD-484A-A512-C1B2332A8D2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15AD089B-B5AD-484A-A512-C1B2332A8D2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
