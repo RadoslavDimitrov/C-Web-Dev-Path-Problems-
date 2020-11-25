@@ -68,8 +68,10 @@ namespace ProductCatalog.Utils
             switch (option)
             {
                 case 1:
+                    productPage.List();
                     break;
                 case 2:
+                    productPage.Add();
                     break;
                 case 3:
                     running = false;
