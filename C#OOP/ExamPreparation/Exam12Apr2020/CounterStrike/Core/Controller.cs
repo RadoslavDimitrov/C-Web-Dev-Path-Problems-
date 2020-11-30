@@ -89,7 +89,8 @@ namespace CounterStrike.Core
 
         public string StartGame()
         {
-            return this.map.Start(players);
+            
+            return this.map.Start(playersCol);
         }
     }
 }
