@@ -11,15 +11,16 @@ using CounterStrike.Utilities.Enums;
 using CounterStrike.Utilities.Messages;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace CounterStrike.Core
 {
     public class Controller : IController
     {
-        private IRepository<IGun> guns;
-        private IRepository<IPlayer> players; //must be dictionary
-        private IMap map;
+        private readonly IRepository<IGun> guns;
+        private readonly IRepository<IPlayer> players; //must be dictionary
+        private readonly IMap map;
 
         public Controller()
         {
@@ -84,13 +85,24 @@ namespace CounterStrike.Core
 
         public string Report()
         {
-            players = players.OrderBy
+            StringBuilder sb = new StringBuilder();
+
+            var reportPlayers = this.players.Models.OrderBy(x => x.GetType().Name)
+                .ThenByDescending(x => x.Health)
+                .ThenBy(x => x.Username);
+
+            foreach (var item in reportPlayers)
+            {
+                sb.AppendLine(item.ToString());
+            }
+
+            return sb.ToString().TrimEnd();
         }
 
         public string StartGame()
         {
-            
-            return this.map.Start(playersCol);
+            var allAlivePlayers = this.players.Models.Where(x => x.IsAlive).ToList();
+            return this.map.Start(allAlivePlayers);
         }
     }
 }
