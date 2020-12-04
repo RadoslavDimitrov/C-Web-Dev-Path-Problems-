@@ -13,9 +13,9 @@ namespace OnlineShop
             File.Create(pathFile).Close();
 
             IReader reader = new ConsoleReader();
-            IWriter writer = new ConsoleWriter();
+            IWriter writer = new FileWriter(pathFile);
             ICommandInterpreter commandInterpreter = new CommandInterpreter();
-            IController controller = null; //new Controller();
+            IController controller = new Controller();
 
             IEngine engine = new Engine(reader, writer, commandInterpreter, controller);
             engine.Run();
