@@ -9,7 +9,6 @@ CREATE TABLE People
 
 INSERT INTO People([Name], Birthdate)
 	VALUES
-		('RADO', '2020-12-31 00:00:00.000')
 		('Victor', '2000-12-07 00:00:00.000'),
 		('Steven', '1992-09-10 00:00:00.000'),
 		('Stephen', '1910-09-19 00:00:00.000'),
