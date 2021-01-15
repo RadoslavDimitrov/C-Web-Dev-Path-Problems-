@@ -1,0 +1,25 @@
+CREATE OR ALTER PROC usp_DepositMoney(@accountId INT, @MoneyAmount MONEY)
+AS
+	BEGIN TRANSACTION
+		
+		IF(@MoneyAmount <= 0)
+			BEGIN
+				THROW 50010, 'Amount shound be positive.', 1;
+			END
+
+		IF(SELECT COUNT(*)
+			FROM Accounts
+			WHERE Id = @accountId) != 1
+			BEGIN
+				THROW 50011, 'Account does not exist.', 1;
+			END
+	
+	UPDATE Accounts 
+		SET Balance += @MoneyAmount WHERE Accounts.Id = @accountId;
+
+		COMMIT
+
+GO
+
+SELECT * FROM Accounts
+EXEC usp_DepositMoney 1, 10
