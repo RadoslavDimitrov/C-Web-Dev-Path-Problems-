@@ -1,1 +1,1 @@
-SELECT * FROM Characters ORDER BY [Name] ASC
+SELECT [Name] FROM Characters ORDER BY [Name] ASC
