@@ -150,3 +150,16 @@ SELECT mAv.Available
 			WHERE j.[Status] LIKE 'Finished'
 			GROUP BY m.FirstName, m.LastName, j.MechanicId) AS [mAv]
 		ORDER BY mAv.MechanicId ASC
+
+
+--9.	Past Expenses
+
+
+SELECT j.JobId,
+			SUM(p.Price)
+			FROM Jobs as j
+			JOIN PartsNeeded as pn ON j.JobId = pn.JobId
+			JOIN Parts as p ON p.PartId = pn.PartId
+			WHERE j.[Status] LIKE 'Finished'
+			GROUP BY j.JobId
+		ORDER BY SUM(p.Price) DESC, j.JobId ASC
