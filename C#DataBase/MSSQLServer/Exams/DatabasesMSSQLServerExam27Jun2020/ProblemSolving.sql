@@ -140,3 +140,13 @@ SELECT CONCAT_WS(' ', m.FirstName, m.LastName) as [Mechanic],
 	ORDER BY m.MechanicId ASC
 
 --8.	Available Mechanics
+
+SELECT mAv.Available
+	FROM
+		(SELECT m.FirstName + ' ' + m.LastName as [Available],
+			j.MechanicId
+			FROM Mechanics as m
+			LEFT JOIN Jobs as j ON m.MechanicId = j.MechanicId
+			WHERE j.[Status] LIKE 'Finished'
+			GROUP BY m.FirstName, m.LastName, j.MechanicId) AS [mAv]
+		ORDER BY mAv.MechanicId ASC
