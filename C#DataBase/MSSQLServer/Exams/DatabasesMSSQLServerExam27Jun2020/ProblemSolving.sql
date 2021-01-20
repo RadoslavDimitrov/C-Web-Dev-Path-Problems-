@@ -163,3 +163,19 @@ SELECT j.JobId,
 			WHERE j.[Status] LIKE 'Finished'
 			GROUP BY j.JobId
 		ORDER BY SUM(p.Price) DESC, j.JobId ASC
+
+--10.	Missing Parts
+--NOT DONE
+SELECT P.PartId, P.Description, PN.Quantity as [Requared], P.StockQty as [In Stock], OP.Quantity as [Ordered]
+	FROM Jobs as J
+	LEFT JOIN PartsNeeded as PN ON J.JobId = PN.JobId
+	LEFT JOIN Parts as P ON P.PartId = PN.PartId
+	LEFT JOIN OrderParts as OP ON OP.PartId = PN.PartId
+	LEFT JOIN Orders as O ON O.JobId = J.JobId
+	WHERE J.Status LIKE 'In Progress'
+	AND O.Delivered = 0
+
+	GROUP BY P.PartId, P.Description, PN.Quantity, P.StockQty, OP.Quantity
+
+
+
