@@ -129,3 +129,14 @@ SELECT c.FirstName + ' ' + c.LastName as [Client],
 	JOIN Jobs as j ON j.ClientId = c.ClientId
 	WHERE j.Status NOT LIKE 'Finished'
 	ORDER BY [Days going] DESC, c.ClientId ASC
+
+--7. Mechanic Performance
+
+SELECT CONCAT_WS(' ', m.FirstName, m.LastName) as [Mechanic],
+	AVG(DATEDIFF(DAY, IssueDate, FinishDate)) as [Diff]
+	FROM Mechanics AS m
+	JOIN Jobs AS j ON m.MechanicId = j.MechanicId
+	GROUP BY m.FirstName, m.LastName,m.MechanicId
+	ORDER BY m.MechanicId ASC
+
+--8.	Available Mechanics
