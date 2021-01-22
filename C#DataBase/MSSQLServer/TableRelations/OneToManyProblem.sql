@@ -16,8 +16,6 @@ CREATE TABLE Models
 	ManufacturerID INT FOREIGN KEY REFERENCES Manufacturers(ManufacturerID)
 )
 
-DROP TABLE Models
-DROP TABLE Manufacturers
 
 INSERT INTO Manufacturers([Name], EstablishedOn)
 	VALUES
