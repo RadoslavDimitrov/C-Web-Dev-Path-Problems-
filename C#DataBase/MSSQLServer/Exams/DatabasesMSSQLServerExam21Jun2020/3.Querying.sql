@@ -32,3 +32,15 @@ SELECT a.Id as AccountId,
 	WHERE a.MiddleName IS NULL AND t.CancelDate IS NULL
 	GROUP BY a.Id, a.FirstName, a.LastName
 	ORDER BY [LongestTrip] DESC, [ShortestTrip] ASC
+
+-- Metropolis 
+
+SELECT TOP(10) 
+		c.Id,
+		c.Name as [City],
+		c.CountryCode as [Country],
+		COUNT(*) as [Accounts]
+	FROM Accounts as a
+	JOIN Cities as c ON a.CityId = c.Id
+	GROUP BY c.Id, c.Name, c.CountryCode
+	ORDER BY COUNT(*) DESC
