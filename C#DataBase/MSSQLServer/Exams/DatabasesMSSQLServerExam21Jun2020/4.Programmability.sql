@@ -54,3 +54,39 @@ SELECT dbo.udf_GetAvailableRoom(94, '2015-07-26', 3);
 --Switch Room 
 
 
+CREATE PROC usp_SwitchRoom(@TripId INT, @TargetRoomId INT)
+AS
+BEGIN
+	--target room -> hotel id
+	IF(
+		(SELECT TOP(1) h.Id
+				FROM Rooms as r
+				JOIN Hotels as h ON r.HotelId = h.Id
+				WHERE r.Id = @TargetRoomId) != (SELECT h.Id
+												FROM Trips as t
+												JOIN Rooms as r ON t.RoomId = r.Id
+												JOIN Hotels as h ON r.HotelId = h.Id
+												WHERE t.Id = @TripId))
+		THROW 50001, 'Target room is in another hotel!', 1
+		--beds
+	IF((SELECT Beds
+		FROM Rooms
+		WHERE Id = @TargetRoomId) < (SELECT COUNT(*) as [Count]
+										FROM AccountsTrips
+										WHERE TripId = @TripId))
+		THROW 50002, 'Not enough beds in target room!', 1;
+
+	UPDATE Trips
+		SET RoomId = @TargetRoomId
+		WHERE Id = @TripId
+
+END			
+
+EXEC usp_SwitchRoom 10, 11
+SELECT RoomId FROM Trips WHERE Id = 10 
+
+EXEC usp_SwitchRoom 10, 7 
+--Target room is in another hotel!
+
+EXEC usp_SwitchRoom 10, 8 
+--Not enough beds in target room!
