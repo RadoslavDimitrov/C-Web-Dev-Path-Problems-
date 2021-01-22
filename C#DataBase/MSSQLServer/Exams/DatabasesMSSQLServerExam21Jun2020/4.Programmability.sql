@@ -48,3 +48,9 @@ SELECT dbo.udf_GetAvailableRoom(112, '2011-12-17', 2);
 
 SELECT dbo.udf_GetAvailableRoom(94, '2015-07-26', 3);
 --No rooms available
+
+
+
+--Switch Room 
+
+
