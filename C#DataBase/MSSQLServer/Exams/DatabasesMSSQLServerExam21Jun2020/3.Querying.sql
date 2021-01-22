@@ -44,3 +44,21 @@ SELECT TOP(10)
 	JOIN Cities as c ON a.CityId = c.Id
 	GROUP BY c.Id, c.Name, c.CountryCode
 	ORDER BY COUNT(*) DESC
+
+
+-- Romantic Getaways 
+
+SELECT a.Id,
+	a.Email,
+	c.Name,
+	COUNT(*) as [Trips]
+	FROM Accounts as a
+	JOIN AccountsTrips as at ON at.AccountId = a.Id
+	JOIN Trips as t ON t.Id = at.TripId
+	JOIN Rooms as r ON t.RoomId = r.Id
+	JOIN Hotels as h ON r.HotelId = h.Id
+	JOIN Cities as c ON a.CityId = c.Id
+	WHERE a.CityId = h.CityId
+	GROUP BY a.Id, a.Email, c.Name
+	ORDER BY [Trips] DESC, a.Id ASC
+	
