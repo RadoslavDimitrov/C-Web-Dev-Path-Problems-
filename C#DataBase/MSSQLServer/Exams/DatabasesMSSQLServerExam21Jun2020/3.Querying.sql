@@ -9,3 +9,13 @@ SELECT a.FirstName,
 	JOIN Cities as c ON a.CityId = c.Id
 	WHERE Email LIKE 'e%'
 	ORDER BY c.Name ASC
+
+
+--City Statistics 
+
+SELECT c.Name,
+	COUNT(*) as Hotels
+	FROM Hotels as h
+	JOIN Cities as c ON h.CityId = c.Id
+	GROUP BY c.Name
+	ORDER BY COUNT(*) DESC, c.Name ASC
