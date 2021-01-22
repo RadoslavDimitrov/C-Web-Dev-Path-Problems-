@@ -62,3 +62,22 @@ SELECT a.Id,
 	GROUP BY a.Id, a.Email, c.Name
 	ORDER BY [Trips] DESC, a.Id ASC
 	
+
+-- GDPR Violation 
+
+SELECT t.Id,
+		CONCAT(a.FirstName,ISNULL(' ' + a.MiddleName, ''),' ',a.LastName) as [Full Name],
+		c.Name as [From],
+		hc.Name as [To],
+		CASE
+			WHEN t.CancelDate IS NULL THEN (CONVERT(NVARCHAR(MAX), DATEDIFF(DAY, t.ArrivalDate, t.ReturnDate)) + ' days')
+			ELSE 'Canceled'
+			END AS [Duration]
+	FROM Accounts as a
+	JOIN AccountsTrips as at ON a.Id = at.AccountId
+	JOIN Trips as t ON t.Id = at.TripId
+	JOIN Rooms as r ON t.RoomId = r.Id
+	JOIN Hotels as h ON r.HotelId = h.Id
+	JOIN Cities as c ON a.CityId = c.Id
+	JOIN Cities as hc ON h.CityId = hc.Id
+	ORDER BY [Full Name], t.Id
