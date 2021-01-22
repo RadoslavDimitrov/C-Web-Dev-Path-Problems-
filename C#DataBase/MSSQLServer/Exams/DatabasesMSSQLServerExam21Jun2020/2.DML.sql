@@ -23,3 +23,7 @@ UPDATE Rooms
 	WHERE HotelId IN (5,7,9)
 
 	--SELECT * FROM Rooms WHERE HotelId IN (5,7,9)
+
+--Delete 
+
+DELETE FROM AccountsTrips WHERE AccountId = 47
