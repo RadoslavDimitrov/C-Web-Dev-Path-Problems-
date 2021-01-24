@@ -36,3 +36,14 @@ SELECT s.[Name],
 	WHERE tc.JobDuringJourney IN ('Pilot') 
 		AND DATEDIFF(YEAR, c.BirthDate, '01/01/2019') < 30
 	ORDER BY s.[Name] ASC
+
+
+--Select all planets and their journey count 
+
+SELECT p.[Name],
+	COUNT(*) as [JourneysCount]
+	FROM Spaceports as s
+	JOIN Journeys as j ON j.DestinationSpaceportId = s.Id
+	JOIN Planets as p ON s.PlanetId = p.Id
+	GROUP BY p.[Name]
+	ORDER BY [JourneysCount] DESC, p.[Name] ASC
