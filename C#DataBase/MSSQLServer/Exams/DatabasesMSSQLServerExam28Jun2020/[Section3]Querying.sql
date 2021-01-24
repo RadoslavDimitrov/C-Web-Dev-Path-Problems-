@@ -24,3 +24,15 @@ SELECT COUNT(*)
 	JOIN TravelCards as tc ON tc.JourneyId = j.Id
 	JOIN Colonists as c ON tc.ColonistId = c.Id
 	WHERE j.Purpose IN ('Technical')
+
+--Select spaceships with pilots younger than 30 years 
+
+SELECT s.[Name],
+	s.[Manufacturer]
+	FROM TravelCards as tc
+	JOIN Colonists as c ON tc.ColonistId = c.Id
+	JOIN Journeys as j ON tc.JourneyId = j.Id
+	JOIN Spaceships as s ON j.SpaceshipId = s.Id
+	WHERE tc.JobDuringJourney IN ('Pilot') 
+		AND DATEDIFF(YEAR, c.BirthDate, '01/01/2019') < 30
+	ORDER BY s.[Name] ASC
