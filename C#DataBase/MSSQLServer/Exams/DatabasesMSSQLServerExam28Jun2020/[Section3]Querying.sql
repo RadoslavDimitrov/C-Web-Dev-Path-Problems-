@@ -51,12 +51,13 @@ SELECT p.[Name],
 
 --Select Second Oldest Important Colonist 
 --NOT WORKING
-SELECT tc.JobDuringJourney,
+SELECT * 
+	FROM (SELECT  tc.JobDuringJourney,
 	c.FirstName + ' ' + c.LastName as [FullName],
-	RANK() OVER(PARTITION BY JobDuringJourney 
-									ORDER BY DATEDIFF(YEAR, c.BirthDate, j.JourneyEnd) ASC) as [JobRank]
+	DENSE_RANK() OVER(PARTITION BY tc.JobDuringJourney ORDER BY DATEDIFF(DAY, c.BirthDate, j.JourneyStart) DESC) as 'Rank'
 	FROM Colonists as c
 	JOIN TravelCards as tc ON tc.ColonistId = c.Id
-	JOIN Journeys as j ON tc.JourneyId = j.Id
-	ORDER BY [JobRank] DESC
+	JOIN Journeys as j ON j.Id = tc.JourneyId
+	GROUP BY tc.JobDuringJourney, c.BirthDate, j.JourneyStart, c.FirstName, c.LastName) as Query
+	WHERE Query.Rank IN (2)
 
