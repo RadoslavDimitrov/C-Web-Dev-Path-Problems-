@@ -47,3 +47,16 @@ SELECT p.[Name],
 	JOIN Planets as p ON s.PlanetId = p.Id
 	GROUP BY p.[Name]
 	ORDER BY [JourneysCount] DESC, p.[Name] ASC
+
+
+--Select Second Oldest Important Colonist 
+--NOT WORKING
+SELECT tc.JobDuringJourney,
+	c.FirstName + ' ' + c.LastName as [FullName],
+	RANK() OVER(PARTITION BY JobDuringJourney 
+									ORDER BY DATEDIFF(YEAR, c.BirthDate, j.JourneyEnd) ASC) as [JobRank]
+	FROM Colonists as c
+	JOIN TravelCards as tc ON tc.ColonistId = c.Id
+	JOIN Journeys as j ON tc.JourneyId = j.Id
+	ORDER BY [JobRank] DESC
+
