@@ -1,5 +1,5 @@
 CREATE DATABASE ColonialJourney
-
+ 
 USE ColonialJourney
 
 CREATE TABLE Planets
