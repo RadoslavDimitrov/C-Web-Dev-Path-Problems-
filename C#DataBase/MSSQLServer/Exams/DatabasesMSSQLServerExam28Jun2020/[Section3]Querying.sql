@@ -15,3 +15,12 @@ SELECT c.Id,
 	JOIN TravelCards as tc ON tc.ColonistId = c.Id
 	WHERE tc.JobDuringJourney IN ('Pilot')
 	ORDER BY c.Id ASC
+
+
+--Count colonists 
+
+SELECT COUNT(*)
+	FROM Journeys as j
+	JOIN TravelCards as tc ON tc.JourneyId = j.Id
+	JOIN Colonists as c ON tc.ColonistId = c.Id
+	WHERE j.Purpose IN ('Technical')
