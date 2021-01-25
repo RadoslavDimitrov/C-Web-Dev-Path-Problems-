@@ -76,14 +76,14 @@ SELECT
 SELECT rankQuery.[countryName],
 	rankQuery.distributorName
 	FROM
-(SELECT c.[Name] as [countryName],
-	d.[Name] as [distributorName],
-	RANK() OVER (PARTITION BY c.Id ORDER BY COUNT(i.Id) DESC) as [rank]
-	FROM Countries as c
-	JOIN Distributors as d ON d.CountryId = c.Id
-	LEFT JOIN Ingredients as i ON i.DistributorId = d.Id
-	GROUP BY c.[Name], d.[Name], c.Id
-	) as [rankQuery]
+		(SELECT c.[Name] as [countryName],
+			d.[Name] as [distributorName],
+			RANK() OVER (PARTITION BY c.Id ORDER BY COUNT(i.Id) DESC) as [rank]
+				FROM Countries as c
+				JOIN Distributors as d ON d.CountryId = c.Id
+				LEFT JOIN Ingredients as i ON i.DistributorId = d.Id
+			GROUP BY c.[Name], d.[Name], c.Id
+			) as [rankQuery]
 	WHERE rankQuery.rank = 1
 	ORDER BY rankQuery.countryName, rankQuery.distributorName
 	
