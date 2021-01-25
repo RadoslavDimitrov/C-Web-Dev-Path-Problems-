@@ -25,13 +25,13 @@ SELECT f.ProductId,
 
 --Customers without Feedback 
 
-SELECT c.FirstName + ' ' + c.LastName as [CustomerName],
-	c.PhoneNumber,
-	c.Gender
+SELECT (c.FirstName + ' ' + c.LastName) as [CustomerName],
+	c.PhoneNumber as PhoneNumber,
+	c.Gender as Gender
 	FROM Customers as c
-	WHERE c.Id NOT IN (SELECT DISTINCT CustomerId
-							FROM Feedbacks)
-		ORDER BY c.Id ASC
+	LEFT JOIN [Feedbacks] as f ON f.CustomerId = c.Id
+	WHERE f.CustomerId IS NULL
+		ORDER BY c.Id 
 
 
 --Customers by Criteria 
@@ -44,3 +44,20 @@ SELECT c.FirstName,
 	JOIN Countries as cou ON c.CountryId = cou.Id
 	WHERE (Age >= 21 AND c.FirstName LIKE '%an%') OR (c.PhoneNumber LIKE '%38' AND cou.[Name] NOT IN ('Greece'))
 	ORDER BY c.FirstName ASC, c.Age DESC
+
+
+--Middle Range Distributors 
+
+SELECT 
+	d.[Name] as [DistributorName],
+	i.[Name] as [IngredientName],
+	p.[Name] as [ProductName],
+	AVG(f.Rate) as [AverageRate]
+	FROM Products as p
+	JOIN ProductsIngredients As [pi] ON [pi].ProductId = p.Id
+	JOIN Ingredients as i ON [pi].IngredientId = i.Id
+	JOIN Distributors as d ON d.Id = i.DistributorId
+	JOIN Feedbacks as f ON f.ProductId = p.Id
+	GROUP BY d.[Name], i.[Name], p.[Name]
+	HAVING AVG(f.Rate) BETWEEN 5 AND 8
+	ORDER BY d.[Name], i.[Name],p.[Name]
