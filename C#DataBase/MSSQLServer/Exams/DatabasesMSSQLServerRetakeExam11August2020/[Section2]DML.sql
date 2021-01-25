@@ -33,3 +33,11 @@ UPDATE Ingredients
 UPDATE Ingredients
 	SET OriginCountryId = 14
 	WHERE OriginCountryId = 8;
+
+--Delete 
+
+SELECT *
+	FROM Feedbacks
+
+DELETE FROM Feedbacks
+	WHERE CustomerId = 14 OR ProductId = 5;
