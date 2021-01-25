@@ -19,3 +19,17 @@ VALUES
 	('Hiu','Portaro',25,'M','0068277755',16),
 	('Josefa','Opitz',43,'F','0197887645',17)
 
+--Update 
+
+--DistributorId -> "Bay Leaf", "Paprika" and "Poppy" to 35
+--Change the OriginCountryId to 14 of all ingredients with OriginCountryId equal to 8. 
+SELECT *
+	FROM Ingredients
+
+UPDATE Ingredients
+	SET DistributorId = 35
+	WHERE [Name] IN ('Bay Leaf', 'Paprika', 'Poppy');
+
+UPDATE Ingredients
+	SET OriginCountryId = 14
+	WHERE OriginCountryId = 8;
