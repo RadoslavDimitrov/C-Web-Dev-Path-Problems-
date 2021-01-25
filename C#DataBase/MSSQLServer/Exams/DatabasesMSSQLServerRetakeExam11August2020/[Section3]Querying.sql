@@ -29,6 +29,18 @@ SELECT c.FirstName + ' ' + c.LastName as [CustomerName],
 	c.PhoneNumber,
 	c.Gender
 	FROM Customers as c
-	WHERE c.Id NOT IN (SELECT CustomerId
+	WHERE c.Id NOT IN (SELECT DISTINCT CustomerId
 							FROM Feedbacks)
 		ORDER BY c.Id ASC
+
+
+--Customers by Criteria 
+
+
+SELECT c.FirstName,
+	c.Age,
+	c.PhoneNumber
+	FROM Customers as c
+	JOIN Countries as cou ON c.CountryId = cou.Id
+	WHERE (Age >= 21 AND c.FirstName LIKE '%an%') OR (c.PhoneNumber LIKE '%38' AND cou.[Name] NOT IN ('Greece'))
+	ORDER BY c.FirstName ASC, c.Age DESC
