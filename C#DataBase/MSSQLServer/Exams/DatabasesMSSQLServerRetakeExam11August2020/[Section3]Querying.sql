@@ -61,3 +61,31 @@ SELECT
 	GROUP BY d.[Name], i.[Name], p.[Name]
 	HAVING AVG(f.Rate) BETWEEN 5 AND 8
 	ORDER BY d.[Name], i.[Name],p.[Name]
+
+--Country Representative 
+
+--SELECT COUNT(i.Id),
+--	c.[Name] as [CountryName],
+--	d.[Name] as [DisributorName]
+--	FROM Countries as c
+--	JOIN Distributors as d ON d.CountryId = c.Id
+--	JOIN Ingredients as i ON i.DistributorId = d.Id
+--	GROUP BY d.[Name], c.[Name]
+--	ORDER BY c.[Name],d.[Name]
+
+SELECT rankQuery.[countryName],
+	rankQuery.distributorName
+	FROM
+(SELECT c.[Name] as [countryName],
+	d.[Name] as [distributorName],
+	RANK() OVER (PARTITION BY c.Id ORDER BY COUNT(i.Id) DESC) as [rank]
+	FROM Countries as c
+	JOIN Distributors as d ON d.CountryId = c.Id
+	LEFT JOIN Ingredients as i ON i.DistributorId = d.Id
+	GROUP BY c.[Name], d.[Name], c.Id
+	) as [rankQuery]
+	WHERE rankQuery.rank = 1
+	ORDER BY rankQuery.countryName, rankQuery.distributorName
+	
+SELECT *
+	FROM Countries
