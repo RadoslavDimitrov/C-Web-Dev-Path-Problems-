@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdoNetEx", "AdoNetEx\AdoNet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P2VillainNames", "P2VillainNames\P2VillainNames.csproj", "{7542422A-5CC9-47AA-9337-3A1A43CB481F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P3MinionNames", "P3MinionNames\P3MinionNames.csproj", "{77590BB3-264A-4335-91A2-0916261B6226}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7542422A-5CC9-47AA-9337-3A1A43CB481F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7542422A-5CC9-47AA-9337-3A1A43CB481F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7542422A-5CC9-47AA-9337-3A1A43CB481F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77590BB3-264A-4335-91A2-0916261B6226}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77590BB3-264A-4335-91A2-0916261B6226}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77590BB3-264A-4335-91A2-0916261B6226}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77590BB3-264A-4335-91A2-0916261B6226}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

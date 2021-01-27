@@ -1,7 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
 
-namespace P2VillainNames
+namespace P3MinionNames
 {
     class Program
     {
@@ -14,17 +14,19 @@ namespace P2VillainNames
 
             using (sqlCon)
             {
-                string command = "SELECT v.Name," +
-                    "COUNT(mv.VillainId) as MinionsCount " +
-                    "FROM Villains as v " +
-                    "JOIN MinionsVillains as mv ON mv.VillainId = v.Id " +
-                    "GROUP BY v.Id,v.Name " +
-                    "HAVING COUNT(mv.VillainId) > 3 " + 
-                    "ORDER BY COUNT(mv.VillainId) ";
+                string @villainId = Console.ReadLine();
+
+                string command = "SELECT *" +
+                                "FROM Villains as v " +
+                                "JOIN MinionsVillains as mv ON mv.VillainId = v.Id " +
+                                "JOIN Minions as m ON mv.MinionId = m.Id " +
+                                "WHERE v.id = " + @villainId  +
+                                "ORDER BY m.Name ASC";
 
                 //output -> Gru - 6
                 SqlCommand sqlCommand = new SqlCommand(command, sqlCon);
-                using var reader = sqlCommand.ExecuteReader();
+                sqlCommand.Parameters.AddWithValue(@villainId);
+                var reader = sqlCommand.ExecuteReader();
 
                 while (reader.Read())
                 {
@@ -33,8 +35,6 @@ namespace P2VillainNames
 
                     Console.WriteLine($"{name} - {count}");
                 }
-
             }
         }
     }
-}
