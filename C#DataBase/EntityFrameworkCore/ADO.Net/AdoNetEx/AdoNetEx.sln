@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdoNetEx", "AdoNetEx\AdoNetEx.csproj", "{0C3F32B3-7EA6-42CD-8C6C-EF8D2363703D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P2VillainNames", "P2VillainNames\P2VillainNames.csproj", "{7542422A-5CC9-47AA-9337-3A1A43CB481F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0C3F32B3-7EA6-42CD-8C6C-EF8D2363703D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C3F32B3-7EA6-42CD-8C6C-EF8D2363703D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C3F32B3-7EA6-42CD-8C6C-EF8D2363703D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7542422A-5CC9-47AA-9337-3A1A43CB481F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7542422A-5CC9-47AA-9337-3A1A43CB481F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7542422A-5CC9-47AA-9337-3A1A43CB481F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7542422A-5CC9-47AA-9337-3A1A43CB481F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

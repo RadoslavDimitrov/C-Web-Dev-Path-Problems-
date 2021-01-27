@@ -25,7 +25,7 @@ namespace AdoNetEx
 
             sqlConnection.Open();
 
-            using(sqlConnection)
+            using (sqlConnection)
             {
                 string com = CreateCommands.CreateTableCountries();
                 SqlCommand command = new SqlCommand(com, sqlConnection);
@@ -48,6 +48,30 @@ namespace AdoNetEx
                 command.ExecuteNonQuery();
 
                 com = CreateCommands.CreateTableMinionsVillains();
+                command = new SqlCommand(com, sqlConnection);
+                command.ExecuteNonQuery();
+
+                com = InsertCommands.InsertIntoCountries();
+                command = new SqlCommand(com, sqlConnection);
+                command.ExecuteNonQuery();
+
+                com = InsertCommands.InsertIntoTowns();
+                command = new SqlCommand(com, sqlConnection);
+                command.ExecuteNonQuery();
+
+                com = InsertCommands.InsertIntoMinions();
+                command = new SqlCommand(com, sqlConnection);
+                command.ExecuteNonQuery();
+
+                com = InsertCommands.InsertIntoEvilnessFactors();
+                command = new SqlCommand(com, sqlConnection);
+                command.ExecuteNonQuery();
+
+                com = InsertCommands.InsertIntoVillains();
+                command = new SqlCommand(com, sqlConnection);
+                command.ExecuteNonQuery();
+
+                com = InsertCommands.InsertIntoMinionsVillains();
                 command = new SqlCommand(com, sqlConnection);
                 command.ExecuteNonQuery();
 
