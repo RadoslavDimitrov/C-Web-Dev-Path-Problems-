@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdoNetEx", "AdoNetEx\AdoNetEx.csproj", "{0C3F32B3-7EA6-42CD-8C6C-EF8D2363703D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdoNetEx", "AdoNetEx\AdoNetEx.csproj", "{0C3F32B3-7EA6-42CD-8C6C-EF8D2363703D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P2VillainNames", "P2VillainNames\P2VillainNames.csproj", "{7542422A-5CC9-47AA-9337-3A1A43CB481F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P2VillainNames", "P2VillainNames\P2VillainNames.csproj", "{7542422A-5CC9-47AA-9337-3A1A43CB481F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P3MinionNames", "P3MinionNames\P3MinionNames.csproj", "{77590BB3-264A-4335-91A2-0916261B6226}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P3MinionNames", "P3MinionNames\P3MinionNames.csproj", "{77590BB3-264A-4335-91A2-0916261B6226}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P4AddMinion", "P4AddMinion\P4AddMinion.csproj", "{732F0EE1-5282-49DA-878D-F640E5749006}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P5ChangeTownNamesCasing", "P5ChangeTownNamesCasing\P5ChangeTownNamesCasing.csproj", "{E913093E-9742-4307-A879-AF2221EF4642}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{77590BB3-264A-4335-91A2-0916261B6226}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77590BB3-264A-4335-91A2-0916261B6226}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77590BB3-264A-4335-91A2-0916261B6226}.Release|Any CPU.Build.0 = Release|Any CPU
+		{732F0EE1-5282-49DA-878D-F640E5749006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{732F0EE1-5282-49DA-878D-F640E5749006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{732F0EE1-5282-49DA-878D-F640E5749006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{732F0EE1-5282-49DA-878D-F640E5749006}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E913093E-9742-4307-A879-AF2221EF4642}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E913093E-9742-4307-A879-AF2221EF4642}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E913093E-9742-4307-A879-AF2221EF4642}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E913093E-9742-4307-A879-AF2221EF4642}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
