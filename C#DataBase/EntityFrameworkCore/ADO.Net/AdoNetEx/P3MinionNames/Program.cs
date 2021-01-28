@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
+using System.Text;
 
 namespace P3MinionNames
 {
@@ -14,27 +15,63 @@ namespace P3MinionNames
 
             using (sqlCon)
             {
-                string @villainId = Console.ReadLine();
+                StringBuilder result = new StringBuilder();
 
-                string command = "SELECT *" +
+                int villainId = int.Parse(Console.ReadLine());
+
+                string villainNameQuery = "SELECT [Name] FROM Villains WHERE Id = @villainId";
+                SqlCommand villainCommand = new SqlCommand(villainNameQuery, sqlCon);
+                villainCommand.Parameters.AddWithValue("@villainId", villainId);
+
+                string vilName = villainCommand.ExecuteScalar()?.ToString();
+
+                if(vilName == null)
+                {
+                    result.AppendLine($"No villain with ID {villainId} exists in the database.");
+                }
+                else
+                {
+                    result.AppendLine($"Villain: {vilName}");
+
+                    string command = "SELECT " +
+                                         "m.Name, " +
+                                         "m.Age " +
                                 "FROM Villains as v " +
                                 "JOIN MinionsVillains as mv ON mv.VillainId = v.Id " +
                                 "JOIN Minions as m ON mv.MinionId = m.Id " +
-                                "WHERE v.id = " + @villainId  +
+                                "WHERE v.id = @villainId " +
                                 "ORDER BY m.Name ASC";
 
-                //output -> Gru - 6
-                SqlCommand sqlCommand = new SqlCommand(command, sqlCon);
-                sqlCommand.Parameters.AddWithValue(@villainId);
-                var reader = sqlCommand.ExecuteReader();
+                    SqlCommand sqlCommand = new SqlCommand(command, sqlCon);
+                    sqlCommand.Parameters.AddWithValue("@villainId", villainId);
 
-                while (reader.Read())
-                {
-                    string name = (string)reader["Name"];
-                    int count = (int)reader["MinionsCount"];
+                    var reader = sqlCommand.ExecuteReader();
 
-                    Console.WriteLine($"{name} - {count}");
+                    if (reader.HasRows)
+                    {
+                        int rowNum = 1;
+
+                        while (reader.Read())
+                        {
+                            string minionName = reader["Name"].ToString();
+                            string minionAge = reader["Age"].ToString();
+
+                            result.AppendLine($"{rowNum}. {minionName} {minionAge}");
+
+                            rowNum++;
+                        }
+                    }
+                    else
+                    {
+                        result.AppendLine("(no minions)");
+                    }
                 }
+
+
+
+                Console.WriteLine(result.ToString().TrimEnd());
+                
             }
         }
     }
+}

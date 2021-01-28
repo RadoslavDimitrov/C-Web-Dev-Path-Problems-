@@ -23,8 +23,8 @@ namespace P2VillainNames
                     "ORDER BY COUNT(mv.VillainId) ";
 
                 //output -> Gru - 6
-                SqlCommand sqlCommand = new SqlCommand(command, sqlCon);
-                using var reader = sqlCommand.ExecuteReader();
+                using SqlCommand sqlCommand = new SqlCommand(command, sqlCon);
+                var reader = sqlCommand.ExecuteReader();
 
                 while (reader.Read())
                 {
