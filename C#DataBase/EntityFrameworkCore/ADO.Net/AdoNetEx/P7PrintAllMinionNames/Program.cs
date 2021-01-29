@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace P7PrintAllMinionNames
 {
@@ -19,6 +20,7 @@ namespace P7PrintAllMinionNames
 
                 List<string> names = new List<string>();
 
+                
                 using (getNamesCommand)
                 {
                     var reader = getNamesCommand.ExecuteReader();
@@ -73,6 +75,8 @@ namespace P7PrintAllMinionNames
                         Console.WriteLine(names[names.Count/2]);
                     }
                 }
+
+                
             }
         }
     }
