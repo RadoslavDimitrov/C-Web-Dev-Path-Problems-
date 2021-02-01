@@ -5,16 +5,16 @@ using System.Collections.Generic;
 
 namespace SoftUni.Models
 {
-    public partial class Towns
+    public partial class Town
     {
-        public Towns()
+        public Town()
         {
-            Addresses = new HashSet<Addresses>();
+            Addresses = new HashSet<Addresse>();
         }
 
         public int TownId { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<Addresses> Addresses { get; set; }
+        public virtual ICollection<Addresse> Addresses { get; set; }
     }
 }
