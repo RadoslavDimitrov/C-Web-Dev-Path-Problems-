@@ -14,7 +14,7 @@ namespace EntityFrameworkIntro
         {
             SoftUniContext DBcontext = new SoftUniContext();
 
-            Console.WriteLine(IncreaseSalaries(DBcontext));
+            Console.WriteLine(GetEmployeesByFirstNameStartingWithSa(DBcontext));
         }
 
         //Problem 15
@@ -53,7 +53,27 @@ namespace EntityFrameworkIntro
 
         public static string GetEmployeesByFirstNameStartingWithSa(SoftUniContext context)
         {
+            StringBuilder sb = new StringBuilder();
 
+            var emp = context.Employees
+                .Where(e => e.FirstName.StartsWith("Sa"))
+                .Select(e => new
+                {
+                    e.FirstName,
+                    e.LastName,
+                    e.JobTitle,
+                    e.Salary
+                })
+                .OrderBy(e => e.FirstName)
+                .ThenBy(e => e.LastName)
+                .ToList();
+
+            foreach (var e in emp)
+            {
+                sb.AppendLine($"{e.FirstName} {e.LastName} - {e.JobTitle} - (${e.Salary:F2})");
+            }
+
+            return sb.ToString().TrimEnd();
         }
 
         //Problem12
