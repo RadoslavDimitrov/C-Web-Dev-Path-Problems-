@@ -14,10 +14,37 @@ namespace EntityFrameworkIntro
         {
             SoftUniContext DBcontext = new SoftUniContext();
 
-            Console.WriteLine(GetEmployeesInPeriod(DBcontext));
+            Console.WriteLine(GetAddressesByTown(DBcontext));
         }
 
+        //Problem 9
+
         //Problem 8
+
+        public static string GetAddressesByTown(SoftUniContext context)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            var adresses = context.Addresses
+                .OrderByDescending(e => e.Employees.Count)
+                .ThenBy(e => e.Town.Name)
+                .ThenBy(e => e.AddressText)
+                .Take(10)
+                .Select(e => new
+                {
+                    e.AddressText,
+                    TownName = e.Town.Name,
+                    EmployeeCount = e.Employees.Count
+                })
+                .ToList();
+
+            foreach (var ad in adresses)
+            {
+                sb.AppendLine($"{ad.AddressText}, {ad.TownName} - {ad.EmployeeCount}");
+            }
+
+            return sb.ToString().TrimEnd();
+        }
 
         //Problem 7
 
