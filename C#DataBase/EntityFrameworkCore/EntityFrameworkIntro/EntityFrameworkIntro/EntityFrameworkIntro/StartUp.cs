@@ -49,6 +49,37 @@ namespace EntityFrameworkIntro
             return $"{addressesCount} addresses in {TownToDelete.Name} were deleted";
         }
 
+        //Problem14
+
+        public static string DeleteProjectById(SoftUniContext context)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            var empProjToDel = context.EmployeesProjects
+                 .Where(ep => ep.ProjectId == 2);
+
+            var project = context.Projects
+                .Where(p => p.ProjectId == 2)
+                .Single();
+
+            foreach (var ep in empProjToDel)
+            {
+                context.EmployeesProjects.Remove(ep);
+            }
+
+            context.Projects.Remove(project);
+
+            context.SaveChanges();
+
+            context.Projects
+                .Take(10)
+                .Select(p => p.Name)
+                .ToList()
+                .ForEach(p => sb.AppendLine(p));
+
+            return sb.ToString().TrimEnd();
+        }
+
         //Problem13
 
         public static string GetEmployeesByFirstNameStartingWithSa(SoftUniContext context)
