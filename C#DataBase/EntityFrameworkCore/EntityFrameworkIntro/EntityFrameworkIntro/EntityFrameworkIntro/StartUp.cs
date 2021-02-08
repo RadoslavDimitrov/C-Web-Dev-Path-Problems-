@@ -14,10 +14,39 @@ namespace EntityFrameworkIntro
         {
             SoftUniContext DBcontext = new SoftUniContext();
 
-            Console.WriteLine(GetAddressesByTown(DBcontext));
+            Console.WriteLine(GetEmployee147(DBcontext));
         }
 
         //Problem 9
+
+        public static string GetEmployee147(SoftUniContext context)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            var emp147 = context.Employees
+                .Where(e => e.EmployeeId == 147)
+                .Select(e => new
+                {
+                    e.FirstName,
+                    e.LastName,
+                    e.JobTitle,
+                    Projects = e.EmployeesProjects
+                                    .OrderBy(ep => ep.Project.Name)
+                                    .Select(ep => ep.Project.Name)
+                                    .ToList()
+                })
+                .FirstOrDefault();
+
+            sb.AppendLine($"{emp147.FirstName} {emp147.LastName} - {emp147.JobTitle}");
+
+
+            foreach (var p in emp147.Projects)
+            {
+                sb.AppendLine(p.ToString());
+            }
+
+            return sb.ToString().TrimEnd();
+        }
 
         //Problem 8
 
