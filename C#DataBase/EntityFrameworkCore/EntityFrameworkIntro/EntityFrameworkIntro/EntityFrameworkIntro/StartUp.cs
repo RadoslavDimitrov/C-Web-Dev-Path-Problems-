@@ -14,7 +14,83 @@ namespace EntityFrameworkIntro
         {
             SoftUniContext DBcontext = new SoftUniContext();
 
-            Console.WriteLine(GetLatestProjects(DBcontext));
+            Console.WriteLine(IncreaseSalaries(DBcontext));
+        }
+
+        //Problem 15
+
+        public static string RemoveTown(SoftUniContext context)
+        {
+            Town TownToDelete = context.Towns
+                .First(t => t.Name == "Seattle");
+
+            IQueryable<Addresse> addressesToDel = context.Addresses
+                .Where(a => a.TownId == TownToDelete.TownId);
+
+            int addressesCount = addressesToDel.Count();
+
+            IQueryable<Employee> empToDel = context.Employees
+                .Where(e => addressesToDel.Any(a => a.AddressId == e.AddressId));
+
+            foreach (var emp in empToDel)
+            {
+                emp.AddressId = null;
+            }
+
+            foreach (var a in addressesToDel)
+            {
+                context.Addresses.Remove(a);
+            }
+
+            context.Towns.Remove(TownToDelete);
+
+            context.SaveChanges();
+
+            return $"{addressesCount} addresses in {TownToDelete.Name} were deleted";
+        }
+
+        //Problem13
+
+        public static string GetEmployeesByFirstNameStartingWithSa(SoftUniContext context)
+        {
+
+        }
+
+        //Problem12
+
+        public static string IncreaseSalaries(SoftUniContext context)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            //Engineering, Tool Design, Marketing or Information Services department by 12%. 
+
+            IQueryable<Employee> emp = context.Employees
+                .Where(e => e.Department.Name == "Engineering" || e.Department.Name == "Tool Design"
+                         || e.Department.Name == "Marketing" || e.Department.Name == "Information Services");
+               
+            foreach (var e in emp)
+            {
+                e.Salary += e.Salary * 0.12M;
+            }
+
+            context.SaveChanges();
+
+            var empInfo = emp.Select(e => new
+            {
+                e.FirstName,
+                e.LastName,
+                e.Salary
+            })
+            .OrderBy(e => e.FirstName)
+            .ThenBy(e => e.LastName)
+            .ToList();
+
+            foreach (var e in empInfo)
+            {
+                sb.AppendLine($"{e.FirstName} {e.LastName} (${e.Salary:F2})");
+            }
+
+            return sb.ToString().TrimEnd();
         }
 
         //Problem 11
