@@ -14,7 +14,35 @@ namespace EntityFrameworkIntro
         {
             SoftUniContext DBcontext = new SoftUniContext();
 
-            Console.WriteLine(GetDepartmentsWithMoreThan5Employees(DBcontext));
+            Console.WriteLine(GetLatestProjects(DBcontext));
+        }
+
+        //Problem 11
+
+        public static string GetLatestProjects(SoftUniContext context)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            var proj = context.Projects
+                .OrderByDescending(p => p.StartDate)
+                .Take(10)
+                .OrderBy(p => p.Name)
+                .Select(p => new
+                {
+                    p.Name,
+                    p.Description,
+                    p.StartDate
+                })
+                .ToList();
+
+            foreach (var p in proj)
+            {
+                sb.AppendLine($"{p.Name}");
+                sb.AppendLine($"{p.Description}");
+                sb.AppendLine($"{p.StartDate.ToString("M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture)}");
+            }
+
+            return sb.ToString().TrimEnd();
         }
 
         //Problem 10
