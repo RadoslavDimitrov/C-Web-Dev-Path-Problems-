@@ -14,7 +14,7 @@ namespace SoftUni
         {
             SoftUniContext DBcontext = new SoftUniContext();
 
-            Console.WriteLine(GetAddressesByTown(DBcontext));
+            Console.WriteLine(GetEmployee147(DBcontext));
         }
 
         //Problem 15
@@ -264,7 +264,7 @@ namespace SoftUni
 
             foreach (var ad in adresses)
             {
-                sb.AppendLine($"{ad.AddressText}, {ad.TownName} - {ad.EmployeeCount}");
+                sb.AppendLine($"{ad.AddressText}, {ad.TownName} - {ad.EmployeeCount} employees");
             }
 
             return sb.ToString().TrimEnd();
