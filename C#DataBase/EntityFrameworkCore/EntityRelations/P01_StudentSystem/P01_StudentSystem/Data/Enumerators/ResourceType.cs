@@ -4,7 +4,11 @@ using System.Text;
 
 namespace P01_StudentSystem.Data.Enumerators
 {
-    class ResourceType
+    public enum ResourceType
     {
+        Video = 1,
+        Presentation = 2,
+        Document = 3,
+        Other = 4
     }
 }

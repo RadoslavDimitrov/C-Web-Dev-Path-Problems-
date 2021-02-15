@@ -2,7 +2,7 @@
 
 namespace P01_StudentSystem
 {
-    class Program
+    public class StartUp
     {
         static void Main(string[] args)
         {

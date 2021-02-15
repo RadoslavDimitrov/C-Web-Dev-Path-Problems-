@@ -24,8 +24,15 @@ namespace P01_StudentSystem.Data.Configurations
             homework.Property(h => h.SubmissionTime)
                 .IsRequired(true);
 
-            homework.Property(h => h.Student)
-                .HasOne
+            homework.HasOne(h => h.Student)
+                .WithMany(s => s.HomeworkSubmissions)
+                .HasForeignKey(h => h.StudentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            homework.HasOne(h => h.Course)
+                .WithMany(x => x.HomeworkSubmissions)
+                .HasForeignKey(h => h.CourseId)
+                .OnDelete(DeleteBehavior.Restrict);
                 
         }
     }
