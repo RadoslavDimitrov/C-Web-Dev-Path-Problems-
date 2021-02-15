@@ -9,12 +9,12 @@ namespace SoftUni.Models
     {
         public Town()
         {
-            Addresses = new HashSet<Addresse>();
+            Addresses = new HashSet<Address>();
         }
 
         public int TownId { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<Addresse> Addresses { get; set; }
+        public virtual ICollection<Address> Addresses { get; set; }
     }
 }

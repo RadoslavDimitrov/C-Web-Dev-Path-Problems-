@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
-namespace EntityFrameworkIntro
+namespace SoftUni
 {
     public class StartUp
     {
@@ -14,7 +14,7 @@ namespace EntityFrameworkIntro
         {
             SoftUniContext DBcontext = new SoftUniContext();
 
-            Console.WriteLine(GetEmployeesByFirstNameStartingWithSa(DBcontext));
+            Console.WriteLine(GetAddressesByTown(DBcontext));
         }
 
         //Problem 15
@@ -24,7 +24,7 @@ namespace EntityFrameworkIntro
             Town TownToDelete = context.Towns
                 .First(t => t.Name == "Seattle");
 
-            IQueryable<Addresse> addressesToDel = context.Addresses
+            IQueryable<Address> addressesToDel = context.Addresses
                 .Where(a => a.TownId == TownToDelete.TownId);
 
             int addressesCount = addressesToDel.Count();
@@ -323,7 +323,7 @@ namespace EntityFrameworkIntro
             var empNakov = context.Employees
                 .First(x => x.LastName == "Nakov");
 
-            var newAdress = new Addresse()
+            var newAdress = new Address()
             {
                 AddressText = "Vitoshka 15",
                 TownId = 4
