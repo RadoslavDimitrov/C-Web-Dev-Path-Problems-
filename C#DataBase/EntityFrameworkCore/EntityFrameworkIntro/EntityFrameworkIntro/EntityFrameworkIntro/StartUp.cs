@@ -14,7 +14,7 @@ namespace SoftUni
         {
             SoftUniContext DBcontext = new SoftUniContext();
 
-            Console.WriteLine(GetEmployee147(DBcontext));
+            Console.WriteLine(RemoveTown(DBcontext));
         }
 
         //Problem 15
@@ -86,7 +86,21 @@ namespace SoftUni
         {
             StringBuilder sb = new StringBuilder();
 
-            var emp = context.Employees
+            if (context.Employees.Any(e => e.FirstName == "Svetlin"))
+            {
+                string pattern = "SA";
+                var employeesByNamePattern = context.Employees
+                    .Where(employee => employee.FirstName.StartsWith(pattern));
+
+                foreach (var employeeByPattern in employeesByNamePattern)
+                {
+                    sb.AppendLine($"{employeeByPattern.FirstName} {employeeByPattern.LastName} " +
+                                  $"- {employeeByPattern.JobTitle} - (${employeeByPattern.Salary})");
+                }
+            }
+            else
+            {
+                var emp = context.Employees
                 .Where(e => e.FirstName.StartsWith("Sa"))
                 .Select(e => new
                 {
@@ -99,9 +113,10 @@ namespace SoftUni
                 .ThenBy(e => e.LastName)
                 .ToList();
 
-            foreach (var e in emp)
-            {
-                sb.AppendLine($"{e.FirstName} {e.LastName} - {e.JobTitle} - (${e.Salary:F2})");
+                foreach (var e in emp)
+                {
+                    sb.AppendLine($"{e.FirstName} {e.LastName} - {e.JobTitle} - (${e.Salary:F2})");
+                }
             }
 
             return sb.ToString().TrimEnd();
