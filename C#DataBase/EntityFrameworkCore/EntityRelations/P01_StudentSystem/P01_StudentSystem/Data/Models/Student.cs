@@ -9,14 +9,10 @@ namespace P01_StudentSystem.Data.Models
     {
         public int StudentId { get; set; }
 
-        [Required]
-        [MaxLength(100)]
-        //unicode
         public string Name { get; set; }
 
         public string PhoneNumber { get; set; }
 
-        [Required]
         public DateTime RegisteredOn { get; set; }
 
         public DateTime? Birthday { get; set; }

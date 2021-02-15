@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using P01_StudentSystem.Data.Configurations;
 using P01_StudentSystem.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -30,13 +31,17 @@ namespace P01_StudentSystem.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Server =.\SQLSERVER; Database = StudentSystem; Integrated Security = true;");
+                optionsBuilder.UseSqlServer(@"Server =.\SQLEXPRESS; Database = StudentSystem; Integrated Security = true;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
+            modelBuilder.ApplyConfiguration(new StudentConfiguration());
+            modelBuilder.ApplyConfiguration(new CourseConfiguration());
+            modelBuilder.ApplyConfiguration(new ResourceConfiguration());
+            modelBuilder.ApplyConfiguration(new HomeworkConfiguration());
+            modelBuilder.ApplyConfiguration(new StudentCourseConfiguration());
         }
 
 
