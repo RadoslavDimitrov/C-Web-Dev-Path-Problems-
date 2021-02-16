@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P03_FootballBetting.Data.Models", "P03_FootballBetting.Data.Models\P03_FootballBetting.Data.Models.csproj", "{BA834B95-6B82-4018-8D05-B5115D1307E0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA834B95-6B82-4018-8D05-B5115D1307E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA834B95-6B82-4018-8D05-B5115D1307E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA834B95-6B82-4018-8D05-B5115D1307E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA834B95-6B82-4018-8D05-B5115D1307E0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B6E5EB6A-D39A-4A17-98A5-D3212143DCF8}
+	EndGlobalSection
+EndGlobal
