@@ -19,16 +19,27 @@ namespace P03_FootballBetting.Data.Models
         [Required]
         [ForeignKey("AwayTeamId")]
         public Team AwayTeam { get; set; }
+        [Required]
         public int HomeTeamGoals { get; set; }
+        [Required]
         public int AwayTeamGoals { get; set; }
+        [Required]
 
         public DateTime DateTime { get; set; }
+        [Required]
 
         public double HomeTeamBetRate { get; set; }
+        [Required]
 
         public double AwayTeamBetRate { get; set; }
+        [Required]
         public double DrawBetRate { get; set; }
 
+        [Required]
         public string Result { get; set; }
+
+        public ICollection<PlayerStatistic> PlayerStatistics { get; set; } = new HashSet<PlayerStatistic>();
+
+        public ICollection<Bet> Bets { get; set; } = new HashSet<Bet>();
     }
 }

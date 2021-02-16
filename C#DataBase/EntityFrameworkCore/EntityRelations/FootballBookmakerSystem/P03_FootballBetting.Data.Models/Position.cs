@@ -11,5 +11,7 @@ namespace P03_FootballBetting.Data.Models
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
+
+        public ICollection<Player> Players { get; set; } = new HashSet<Player>();
     }
 }

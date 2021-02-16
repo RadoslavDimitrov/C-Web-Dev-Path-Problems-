@@ -35,5 +35,15 @@ namespace P03_FootballBetting.Data.Models
         [Required]
         [ForeignKey("SecondaryKitColorId")]
         public Color SecondaryKitColor { get; set; }
+
+        public int TownId { get; set; }
+        [Required]
+        [ForeignKey("TownId")]
+        public Town Town { get; set; }
+
+        public ICollection<Game> HomeGames { get; set; } = new HashSet<Game>();
+        public ICollection<Game> AwayGames { get; set; } = new HashSet<Game>();
+        public ICollection<Player> Players { get; set; } = new HashSet<Player>();
+
     }
 }

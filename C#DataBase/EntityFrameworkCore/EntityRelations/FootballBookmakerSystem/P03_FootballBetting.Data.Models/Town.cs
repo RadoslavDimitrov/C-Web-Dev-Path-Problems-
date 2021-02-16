@@ -17,5 +17,7 @@ namespace P03_FootballBetting.Data.Models
         [Required]
         [ForeignKey("CountryId")]
         public Country Country { get; set; }
+
+        public ICollection<Team> Teams { get; set; } = new HashSet<Team>();
     }
 }

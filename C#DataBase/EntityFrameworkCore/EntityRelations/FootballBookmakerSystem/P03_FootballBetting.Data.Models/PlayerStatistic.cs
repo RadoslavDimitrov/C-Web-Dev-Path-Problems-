@@ -20,8 +20,11 @@ namespace P03_FootballBetting.Data.Models
         [ForeignKey("PlayerId")]
         public Player Player { get; set; }
 
+        [Required]
         public int ScoredGoals { get; set; }
+        [Required]
         public int Assists { get; set; }
+        [Required]
         public int MinutesPlayed { get; set; }
     }
 }
