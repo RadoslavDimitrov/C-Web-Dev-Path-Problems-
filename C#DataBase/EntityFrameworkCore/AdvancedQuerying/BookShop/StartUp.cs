@@ -40,8 +40,35 @@
             //string input = Console.ReadLine();
             //Console.WriteLine(GetBooksByCategory(db, input));
 
-            string date = Console.ReadLine();
-            Console.WriteLine(GetBooksReleasedBefore(db, date));
+            //Problem 7
+            //string date = Console.ReadLine();
+            //Console.WriteLine(GetBooksReleasedBefore(db, date));
+
+            string input = Console.ReadLine();
+            Console.WriteLine(GetAuthorNamesEndingIn(db, input));
+        }
+
+        //Problem 8. Author Search
+
+        public static string GetAuthorNamesEndingIn(BookShopContext context, string input)
+        {
+            sb = new StringBuilder();
+
+            var authors = context.Authors
+                .Where(a => a.FirstName.EndsWith(input))
+                .Select(a => new
+                {
+                    FullName = a.FirstName + " " + a.LastName
+                })
+                .OrderBy(a => a.FullName)
+                .ToList();
+
+            foreach (var author in authors)
+            {
+                sb.AppendLine($"{author.FullName}");
+            }
+
+            return sb.ToString().Trim();
         }
 
         //Problem 7. Released Before Date
