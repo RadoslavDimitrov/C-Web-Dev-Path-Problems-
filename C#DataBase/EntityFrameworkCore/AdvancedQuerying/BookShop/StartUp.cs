@@ -4,6 +4,7 @@
     using Data;
     using Initializer;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
@@ -30,6 +31,33 @@
             //Problem 4
             //Console.WriteLine(GetBooksByPrice(db));
 
+            //Problem 5
+            //int year = int.Parse(Console.ReadLine());
+            //Console.WriteLine(GetBooksNotReleasedIn(db,year));
+
+            string input = Console.ReadLine();
+            Console.WriteLine(GetBooksByCategory(db, input));
+        }
+
+        //Problem 6 Book Titles by Category
+
+        public static string GetBooksByCategory(BookShopContext context, string input)
+        {
+            List<string> categories = input.Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(c => c.ToLower()).ToList();
+
+            List<string> bookTitles = new List<string>();
+
+            foreach (var category in categories)
+            {
+                var currCategoryBooks = context.Books
+                    .Where(b => b.BookCategories.Any(bc => bc.Category.Name.ToLower() == category))
+                    .Select(b => b.Title)
+                    .ToList();
+
+                bookTitles.AddRange(currCategoryBooks);
+            }
+
+            return string.Join(Environment.NewLine, bookTitles.OrderBy(b => b));
         }
 
         //Problem 5. Not Released In
@@ -37,10 +65,12 @@
         public static string GetBooksNotReleasedIn(BookShopContext context, int year)
         {
             var books = context.Books
-                .AsEnumerable()
-                .Where(b => b)
+                .Where(b => b.ReleaseDate.Value.Year != year)
+                .OrderBy(b => b.BookId)
+                .Select(b => b.Title)
+                .ToList();
 
-            return null;
+            return string.Join(Environment.NewLine, books);
         }
 
         //Problem 4 -Books by Price
