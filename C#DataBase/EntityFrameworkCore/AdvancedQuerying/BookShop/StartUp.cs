@@ -5,6 +5,7 @@
     using Initializer;
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Text;
 
@@ -35,8 +36,38 @@
             //int year = int.Parse(Console.ReadLine());
             //Console.WriteLine(GetBooksNotReleasedIn(db,year));
 
-            string input = Console.ReadLine();
-            Console.WriteLine(GetBooksByCategory(db, input));
+            //Problem 6
+            //string input = Console.ReadLine();
+            //Console.WriteLine(GetBooksByCategory(db, input));
+
+            string date = Console.ReadLine();
+            Console.WriteLine(GetBooksReleasedBefore(db, date));
+        }
+
+        //Problem 7. Released Before Date
+
+        public static string GetBooksReleasedBefore(BookShopContext context, string date)
+        {
+            sb = new StringBuilder();
+
+            DateTime dateTime = DateTime.ParseExact(date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+
+            var books = context.Books
+                .Where(b => b.ReleaseDate < dateTime)
+                .OrderByDescending(b => b.ReleaseDate)
+                .Select(b => new
+                {
+                    b.Title,
+                    b.EditionType,
+                    b.Price
+                });
+
+            foreach (var book in books)
+            {
+                sb.AppendLine($"{book.Title} - {book.EditionType} - ${book.Price:F2}");
+            }
+
+            return sb.ToString().Trim();
         }
 
         //Problem 6 Book Titles by Category
