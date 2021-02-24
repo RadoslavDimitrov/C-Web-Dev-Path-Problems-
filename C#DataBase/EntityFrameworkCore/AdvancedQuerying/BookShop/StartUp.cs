@@ -55,6 +55,21 @@
             //Problem10
             //string input = Console.ReadLine();
             //Console.WriteLine(GetBooksByAuthor(db,input));
+
+            //Problem11
+            //int length = int.Parse(Console.ReadLine());
+            //Console.WriteLine(CountBooks(db, length));
+        }
+
+        //Problem 11. Count Books
+
+        public static int CountBooks(BookShopContext context, int lengthCheck)
+        {
+            var bookCount = context.Books
+                .Where(b => b.Title.Length > lengthCheck)
+                .Count();
+
+            return bookCount;
         }
 
         //Problem 10. Book Search by Author
