@@ -70,7 +70,26 @@
             //Console.WriteLine(GetMostRecentBooks(db));
 
             //Problem15
-            IncreasePrices(db);
+            //IncreasePrices(db);
+
+            //Problem16
+            Console.WriteLine(RemoveBooks(db));
+        }
+
+        //Problem 16. Remove Books
+
+        public static int RemoveBooks(BookShopContext context)
+        {
+            var books = context.Books
+                .Where(b => b.Copies < 4200);
+
+            int removedCount = books.Count();
+
+            context.Books.RemoveRange(books);
+
+            context.SaveChanges();
+
+            return removedCount;
         }
 
         //Problem 15. Increase Prices
