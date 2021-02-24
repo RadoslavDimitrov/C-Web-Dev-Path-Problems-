@@ -67,7 +67,25 @@
             //Console.WriteLine(GetTotalProfitByCategory(db));
 
             //Problem14
-            Console.WriteLine(GetMostRecentBooks(db));
+            //Console.WriteLine(GetMostRecentBooks(db));
+
+            //Problem15
+            IncreasePrices(db);
+        }
+
+        //Problem 15. Increase Prices
+
+        public static void IncreasePrices(BookShopContext context)
+        {
+            var books = context.Books
+                .Where(b => b.ReleaseDate.Value.Year < 2010);
+
+            foreach (var book in books)
+            {
+                book.Price += 5;
+            }
+
+            context.SaveChanges();
         }
 
         //Problem 14. Most Recent Books
