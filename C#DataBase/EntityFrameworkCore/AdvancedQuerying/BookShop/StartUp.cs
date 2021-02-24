@@ -49,8 +49,36 @@
             //Console.WriteLine(GetAuthorNamesEndingIn(db, input));
 
             //Problem 9
-            string input = Console.ReadLine();
-            Console.WriteLine(GetBookTitlesContaining(db, input));
+            //string input = Console.ReadLine();
+            //Console.WriteLine(GetBookTitlesContaining(db, input));
+
+            //Problem10
+            //string input = Console.ReadLine();
+            //Console.WriteLine(GetBooksByAuthor(db,input));
+        }
+
+        //Problem 10. Book Search by Author
+
+        public static string GetBooksByAuthor(BookShopContext context, string input)
+        {
+            sb = new StringBuilder();
+
+            var books = context.Books
+                .Where(b => b.Author.LastName.ToLower().StartsWith(input.ToLower()))
+                .OrderBy(b => b.BookId)
+                .Select(b => new
+                {
+                    b.Title,
+                    AuthorName = b.Author.FirstName + " " + b.Author.LastName
+                })
+                .ToList();
+
+            foreach (var book in books)
+            {
+                sb.AppendLine($"{book.Title} ({book.AuthorName})");
+            }
+
+            return sb.ToString().Trim();
         }
 
         //Problem 9. Book Search
