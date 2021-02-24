@@ -61,7 +61,39 @@
             //Console.WriteLine(CountBooks(db, length));
 
             //Problem12
-            Console.WriteLine(CountCopiesByAuthor(db));
+            //Console.WriteLine(CountCopiesByAuthor(db));
+
+            //Problem13
+            Console.WriteLine(GetTotalProfitByCategory(db));
+        }
+
+        //Problem 13. Profit by Category
+
+        public static string GetTotalProfitByCategory(BookShopContext context)
+        {
+            sb = new StringBuilder();
+
+            var categories = context.Categories
+                .Select(c => new
+                {
+                    c.Name,
+                    TotalProfit = c.CategoryBooks
+                            .Select(cb => new
+                            {
+                                BookProfit = cb.Book.Price * cb.Book.Copies
+                            })
+                            .Sum(c => c.BookProfit)
+                })
+                .OrderByDescending(p => p.TotalProfit)
+                .ThenBy(c => c.Name)
+                .ToList();
+
+            foreach (var categorie in categories)
+            {
+                sb.AppendLine($"{categorie.Name} ${categorie.TotalProfit:F2}");
+            }
+
+            return sb.ToString().Trim();
         }
 
         //Problem 12. Total Book Copies
