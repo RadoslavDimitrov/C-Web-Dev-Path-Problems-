@@ -44,8 +44,36 @@
             //string date = Console.ReadLine();
             //Console.WriteLine(GetBooksReleasedBefore(db, date));
 
+            //Problem 8
+            //string input = Console.ReadLine();
+            //Console.WriteLine(GetAuthorNamesEndingIn(db, input));
+
+            //Problem 9
             string input = Console.ReadLine();
-            Console.WriteLine(GetAuthorNamesEndingIn(db, input));
+            Console.WriteLine(GetBookTitlesContaining(db, input));
+        }
+
+        //Problem 9. Book Search
+
+        public static string GetBookTitlesContaining(BookShopContext context, string input)
+        {
+            sb = new StringBuilder();
+
+            var books = context.Books
+                .Where(b => b.Title.ToLower().Contains(input.ToLower()))
+                .Select(b => new
+                {
+                    b.Title
+                })
+                .OrderBy(b => b.Title)
+                .ToList();
+
+            foreach (var book in books)
+            {
+                sb.AppendLine($"{book.Title}");
+            }
+
+            return sb.ToString().Trim();
         }
 
         //Problem 8. Author Search
