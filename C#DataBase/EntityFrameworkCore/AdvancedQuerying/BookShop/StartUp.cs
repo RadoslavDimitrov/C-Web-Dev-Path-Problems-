@@ -16,7 +16,7 @@
         public static void Main()
         {
             using var db = new BookShopContext();
-            //DbInitializer.ResetDatabase(db);
+            DbInitializer.ResetDatabase(db);
 
             //Problem 2
             //var input = Console.ReadLine();
@@ -74,6 +74,7 @@
 
             //Problem16
             Console.WriteLine(RemoveBooks(db));
+            //Console.WriteLine(db.Books.Count());
         }
 
         //Problem 16. Remove Books
