@@ -30,6 +30,16 @@ namespace ProductShop
                 .MapFrom(x => x.CategoryProducts.Sum(cp => cp.Product.Price).ToString("f2")))
                 .ForMember(x => x.ProductsCount, y => y
                 .MapFrom(x => x.CategoryProducts.Count));
+
+            this.CreateMap<Product, ProductDTO>();
+
+            this.CreateMap<Product, SoldProductsWithCountDTO>()
+                .ForMember(x => x.Count, y => y.MapFrom(x => x.CategoryProducts.Count))
+                .ForMember(x => x.Products, y => y.MapFrom(x => x.CategoryProducts));
+
+            this.CreateMap<User, UserSoldProductsDTO>()
+                .ForMember(x => x.SoldProducts, y => y.MapFrom(x => x.ProductsSold));
+
         }
     }
 }

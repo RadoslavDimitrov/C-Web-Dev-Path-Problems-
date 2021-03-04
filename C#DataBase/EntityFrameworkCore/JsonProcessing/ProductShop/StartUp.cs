@@ -19,10 +19,15 @@ namespace ProductShop
             ProductShopContext context = new ProductShopContext();
             InitializeMapper();
 
-            //Problem 7
-            var json = GetCategoriesByProductsCount(context);
+            //Problem 8
+            var json = GetUsersWithProducts(context);
             EnsureDirectoryExists();
-            File.WriteAllText(ResultPath + "/categories-by-productsDTO.json", json);
+            File.WriteAllText(ResultPath + "/users-and-products.json", json);
+
+            //Problem 7
+            //var json = GetCategoriesByProductsCount(context);
+            //EnsureDirectoryExists();
+            //File.WriteAllText(ResultPath + "/categories-by-productsDTO.json", json);
 
             //Problem 6
             //var json = GetSoldProducts(context);
@@ -65,7 +70,51 @@ namespace ProductShop
             //SeedDatabase(context, users, products, categories, categoriesProducts);
         }
 
+        //Problem 8
 
+        public static string GetUsersWithProducts(ProductShopContext context)
+        {
+            var users = context.Users
+                .Where(x => x.ProductsSold.Any(p => p.Buyer != null))
+                .OrderByDescending(x => x.ProductsSold.Count(p => p.Buyer != null))
+                .Select(x => new UserSoldProductsDTO
+                {
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    Age = x.Age,
+                    SoldProducts = new SoldProductsWithCountDTO()
+                    {
+                        Count = x.ProductsSold.Count(p => p.Buyer != null),
+                        Products = x.ProductsSold
+                                    .ToList()
+                                    .Where(p => p.Buyer != null)
+                                    .Select(p => new ProductDTO()
+                                    {
+                                        Name = p.Name,
+                                        Price = p.Price
+                                    })
+                                    .ToList()
+
+
+                    }
+                })
+                .ToList();
+
+            var resultObj = new UsersAndProductsDTO()
+            {
+                UsersCount = users.Count,
+                Users = users
+            };
+
+            var result = JsonConvert.SerializeObject(users, new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore
+            });
+
+            return result;
+
+        }
 
         //Problem 7
         public static string GetCategoriesByProductsCount(ProductShopContext context)
