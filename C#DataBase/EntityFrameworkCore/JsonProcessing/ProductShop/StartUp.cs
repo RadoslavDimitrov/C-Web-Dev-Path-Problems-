@@ -19,6 +19,11 @@ namespace ProductShop
             ProductShopContext context = new ProductShopContext();
             InitializeMapper();
 
+            //Problem 7
+            var json = GetCategoriesByProductsCount(context);
+            EnsureDirectoryExists();
+            File.WriteAllText(ResultPath + "/categories-by-productsDTO.json", json);
+
             //Problem 6
             //var json = GetSoldProducts(context);
             //EnsureDirectoryExists();
@@ -65,17 +70,21 @@ namespace ProductShop
         //Problem 7
         public static string GetCategoriesByProductsCount(ProductShopContext context)
         {
-            context.Categories
+            var categories = context.Categories
                 .OrderByDescending(c => c.CategoryProducts.Count)
-                .Select(x => new
-                {
-                    category = x.Name,
-                    productsCount = x.CategoryProducts.Count,
-                    averagePrice = x.CategoryProducts.Average(cp => cp.Product.Price).ToString("f2"),
-                    totalRevenue = x.CategoryProducts.Sum(cp => cp.Product.Price).ToString("f2")
-                });
+                .ProjectTo<CategoriesByProductsCountDTO>()
+                .ToList();
+                //.Select(x => new
+                //{
+                //    category = x.Name,
+                //    productsCount = x.CategoryProducts.Count,
+                //    averagePrice = x.CategoryProducts.Average(cp => cp.Product.Price).ToString("f2"),
+                //    totalRevenue = x.CategoryProducts.Sum(cp => cp.Product.Price).ToString("f2")
+                //});
 
-            return null;
+            string result = JsonConvert.SerializeObject(categories, Formatting.Indented);
+
+            return result;
         }
 
         //Problem 6

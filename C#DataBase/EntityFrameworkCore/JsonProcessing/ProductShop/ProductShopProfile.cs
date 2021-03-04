@@ -22,6 +22,14 @@ namespace ProductShop
             this.CreateMap<User, UsersWithSoldProductsDTO>()
                 .ForMember(x => x.SoldProducts, y => y
                 .MapFrom(x => x.ProductsSold.Where(p => p.Buyer != null)));
+
+            this.CreateMap<Category, CategoriesByProductsCountDTO>()
+                .ForMember(x => x.AveragePrice, y => y
+                .MapFrom(x => x.CategoryProducts.Average(cp => cp.Product.Price).ToString("f2")))
+                .ForMember(x => x.TotalRevenue, y => y
+                .MapFrom(x => x.CategoryProducts.Sum(cp => cp.Product.Price).ToString("f2")))
+                .ForMember(x => x.ProductsCount, y => y
+                .MapFrom(x => x.CategoryProducts.Count));
         }
     }
 }
