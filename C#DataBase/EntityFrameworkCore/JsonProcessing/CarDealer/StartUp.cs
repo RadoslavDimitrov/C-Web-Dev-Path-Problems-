@@ -57,9 +57,66 @@ namespace CarDealer
             //File.WriteAllText(ResultPath + "/toyota-cars.json", json);
 
             //Problem 16
-            string json = GetLocalSuppliers(context);
+            //string json = GetLocalSuppliers(context);
+            //EnsureDirectoryExist();
+            //File.WriteAllText(ResultPath + "/local-suppliers.json", json);
+
+            //Problem 17
+            //string json = GetCarsWithTheirListOfParts(context);
+            //EnsureDirectoryExist();
+            //File.WriteAllText(ResultPath + "/cars-and-parts.json", json);
+
+            string json = GetTotalSalesByCustomer(context);
             EnsureDirectoryExist();
-            File.WriteAllText(ResultPath + "/local-suppliers.json", json);
+            File.WriteAllText(ResultPath + "/customers-total-sales.json", json);
+        }
+
+        //Problem 18
+        public static string GetTotalSalesByCustomer(CarDealerContext context)
+        {
+            var customers = context.Customers
+                .Where(x => x.Sales.Count > 0)
+                .Select(x => new
+                {
+                    fullName = x.Name,
+                    boughtCars = x.Sales.Count,
+                    spentMoney = x.Sales.Sum(s => s.Car.PartCars.Sum(p => p.Part.Price)))
+                })
+                .OrderByDescending(x => x.spentMoney)
+                .ThenByDescending(x => x.boughtCars)
+                .ToList();
+
+            var json = JsonConvert.SerializeObject(customers, Formatting.Indented);
+
+            return json;
+
+        }
+
+        //Problem 17
+        public static string GetCarsWithTheirListOfParts(CarDealerContext context)
+        {
+            var carsWithParts = context.Cars
+                .Select(c => new
+                {
+                    car = new
+                    {
+                        Make = c.Make,
+                        Model = c.Model,
+                        TravelledDistance = c.TravelledDistance
+                    },
+                    parts = c.PartCars.Select(pc => new
+                    {
+                        Name = pc.Part.Name,
+                        Price = pc.Part.Price.ToString("f2")
+                    })
+                    .ToList()
+                })
+                .ToList();
+
+            string json = JsonConvert.SerializeObject(carsWithParts, Formatting.Indented);
+
+            return json;
+            
         }
 
         //Problem 16
