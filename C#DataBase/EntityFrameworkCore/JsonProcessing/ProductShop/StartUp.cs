@@ -75,38 +75,62 @@ namespace ProductShop
         public static string GetUsersWithProducts(ProductShopContext context)
         {
             var users = context.Users
-                .Where(x => x.ProductsSold.Any(p => p.Buyer != null))
-                .OrderByDescending(x => x.ProductsSold.Count(p => p.Buyer != null))
-                .Select(x => new UserSoldProductsDTO
+                .ToList()
+                .Where(u => u.ProductsSold.Any(p => p.Buyer != null))
+                .OrderByDescending(u => u.ProductsSold.Count(p => p.Buyer != null))
+                .Select(u => new UserSoldProductsDTO()
                 {
-                    FirstName = x.FirstName,
-                    LastName = x.LastName,
-                    Age = x.Age,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Age = u.Age,
                     SoldProducts = new SoldProductsWithCountDTO()
                     {
-                        Count = x.ProductsSold.Count(p => p.Buyer != null),
-                        Products = x.ProductsSold
-                                    .ToList()
-                                    .Where(p => p.Buyer != null)
-                                    .Select(p => new ProductDTO()
-                                    {
-                                        Name = p.Name,
-                                        Price = p.Price
-                                    })
-                                    .ToList()
-
-
+                        Count = u.ProductsSold.Count(p => p.Buyer != null),
+                        Products = u.ProductsSold
+                        .ToList()
+                        .Where(p => p.Buyer != null)
+                            .Select(p => new ProductDTO()
+                            {
+                                Name = p.Name,
+                                Price = p.Price
+                            })
+                            .ToList()
                     }
                 })
                 .ToList();
+            //var users = context.Users
+            //    .Where(x => x.ProductsSold.Any(p => p.Buyer != null))
+            //    .OrderByDescending(x => x.ProductsSold.Count(p => p.Buyer != null))
+            //    .Select(x => new UserSoldProductsDTO
+            //    {
+            //        FirstName = x.FirstName,
+            //        LastName = x.LastName,
+            //        Age = x.Age,
+            //        SoldProducts = new SoldProductsWithCountDTO()
+            //        {
+            //            Count = x.ProductsSold.Count(p => p.Buyer != null),
+            //            Products = x.ProductsSold
+            //                        .ToList()
+            //                        .Where(p => p.Buyer != null)
+            //                        .Select(p => new ProductDTO()
+            //                        {
+            //                            Name = p.Name,
+            //                            Price = p.Price
+            //                        })
+            //                        .ToList()
+
+
+            //        }
+            //    })
+            //    .ToList();
 
             var resultObj = new UsersAndProductsDTO()
             {
-                UsersCount = users.Count,
+                Count = users.Count,
                 Users = users
             };
 
-            var result = JsonConvert.SerializeObject(users, new JsonSerializerSettings
+            var result = JsonConvert.SerializeObject(resultObj, new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
                 NullValueHandling = NullValueHandling.Ignore
@@ -123,13 +147,13 @@ namespace ProductShop
                 .OrderByDescending(c => c.CategoryProducts.Count)
                 .ProjectTo<CategoriesByProductsCountDTO>()
                 .ToList();
-                //.Select(x => new
-                //{
-                //    category = x.Name,
-                //    productsCount = x.CategoryProducts.Count,
-                //    averagePrice = x.CategoryProducts.Average(cp => cp.Product.Price).ToString("f2"),
-                //    totalRevenue = x.CategoryProducts.Sum(cp => cp.Product.Price).ToString("f2")
-                //});
+            //.Select(x => new
+            //{
+            //    category = x.Name,
+            //    productsCount = x.CategoryProducts.Count,
+            //    averagePrice = x.CategoryProducts.Average(cp => cp.Product.Price).ToString("f2"),
+            //    totalRevenue = x.CategoryProducts.Sum(cp => cp.Product.Price).ToString("f2")
+            //});
 
             string result = JsonConvert.SerializeObject(categories, Formatting.Indented);
 
@@ -256,7 +280,7 @@ namespace ProductShop
         }
 
         private static void SeedDatabase(ProductShopContext context, string inputUsersJson, string inputProductsJson
-            ,string InputCategoriesJson, string inputCategoriesProductsJson)
+            , string InputCategoriesJson, string inputCategoriesProductsJson)
         {
             Console.WriteLine(ImportUsers(context, inputUsersJson));
             Console.WriteLine(ImportProducts(context, inputProductsJson));

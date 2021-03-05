@@ -8,7 +8,7 @@ namespace ProductShop.DTO
     public class UsersAndProductsDTO
     {
         [JsonProperty("usersCount")]
-        public int UsersCount { get; set; }
+        public int Count { get; set; }
         [JsonProperty("users")]
         public List<UserSoldProductsDTO> Users { get; set; }
     }
