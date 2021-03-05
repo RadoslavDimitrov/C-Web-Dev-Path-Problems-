@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using CarDealer.Data;
 using CarDealer.DTO;
 using CarDealer.Models;
@@ -66,30 +67,55 @@ namespace CarDealer
             //EnsureDirectoryExist();
             //File.WriteAllText(ResultPath + "/cars-and-parts.json", json);
 
-            string json = GetTotalSalesByCustomer(context);
+            //Problem 18
+            //string json = GetTotalSalesByCustomer(context);
+            //EnsureDirectoryExist();
+            //File.WriteAllText(ResultPath + "/customers-total-sales.json", json);
+
+            //Problem 19
+            string json = GetSalesWithAppliedDiscount(context);
             EnsureDirectoryExist();
-            File.WriteAllText(ResultPath + "/customers-total-sales.json", json);
+            File.WriteAllText(ResultPath + "/sales-discounts.json", json);
+        }
+
+        //Problem 19
+        public static string GetSalesWithAppliedDiscount(CarDealerContext context)
+        {
+            var sales = context.Sales
+                .Take(10)
+                .Select(s => new
+                {
+                    car = new
+                    {
+                        Make = s.Car.Make,
+                        Model = s.Car.Model,
+                        TravelledDistance = s.Car.TravelledDistance
+                    },
+                    customerName = s.Customer.Name,
+                    Discount = s.Discount.ToString("f2"),
+                    price = (s.Car.PartCars.Select(cp => cp.Part.Price).Sum()).ToString("f2"),
+                    priceWithDiscount = ((s.Car.PartCars.Select(cp => cp.Part.Price).Sum() * (100 - s.Discount)) / 100).ToString("f2")
+                })
+                .ToList();
+
+            var json = JsonConvert.SerializeObject(sales, Formatting.Indented);
+
+            return json;
         }
 
         //Problem 18
         public static string GetTotalSalesByCustomer(CarDealerContext context)
         {
             var customers = context.Customers
-                .Where(x => x.Sales.Count > 0)
-                .Select(x => new
-                {
-                    fullName = x.Name,
-                    boughtCars = x.Sales.Count,
-                    spentMoney = x.Sales.Sum(s => s.Car.PartCars.Sum(p => p.Part.Price)))
-                })
-                .OrderByDescending(x => x.spentMoney)
-                .ThenByDescending(x => x.boughtCars)
+                .ProjectTo<CustomerTotalSalesDto>()
+                .Where(c => c.CarsBought >= 1)
+                .OrderByDescending(c => c.SpentMoney)
+                .ThenByDescending(c => c.CarsBought)
                 .ToList();
 
             var json = JsonConvert.SerializeObject(customers, Formatting.Indented);
 
             return json;
-
         }
 
         //Problem 17
@@ -116,7 +142,7 @@ namespace CarDealer
             string json = JsonConvert.SerializeObject(carsWithParts, Formatting.Indented);
 
             return json;
-            
+
         }
 
         //Problem 16
@@ -260,6 +286,15 @@ namespace CarDealer
             return $"Successfully imported {suppliers.Count}.";
         }
 
+        private static void ResetDatabase(CarDealerContext context)
+        {
+            context.Database.EnsureDeleted();
+            Console.WriteLine("Database was deleted");
+            context.Database.EnsureCreated();
+            Console.WriteLine("Database was created");
+        }
+
+
         private static void EnsureDirectoryExist()
         {
             if (!Directory.Exists(ResultPath))
@@ -267,6 +302,7 @@ namespace CarDealer
                 Directory.CreateDirectory(ResultPath);
             }
         }
+
         private static void InitializeMapper()
         {
             Mapper.Initialize(cfg =>
@@ -275,12 +311,9 @@ namespace CarDealer
             });
         }
 
-        private static void ResetDatabase(CarDealerContext context)
-        {
-            context.Database.EnsureDeleted();
-            Console.WriteLine("Database was deleted");
-            context.Database.EnsureCreated();
-            Console.WriteLine("Database was created");
-        }
+        
+
     }
+    
 }
+
