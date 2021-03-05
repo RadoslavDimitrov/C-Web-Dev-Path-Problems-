@@ -12,14 +12,11 @@ namespace CarDealer
 {
     public class StartUp
     {
+        private static string ResultPath = @"../../../Datasets/Results";
         public static void Main(string[] args)
         {
             CarDealerContext context = new CarDealerContext();
             InitializeMapper();
-
-            string input = File.ReadAllText("../../../Datasets/customers.json");
-            string result = ImportCustomers(context, input);
-            Console.WriteLine(result);
 
             //ResetDatabase(context);
 
@@ -38,6 +35,51 @@ namespace CarDealer
             //string input = File.ReadAllText("../../../Datasets/cars.json");
             //string result = ImportCars(context, input);
             //Console.WriteLine(result);
+
+            //Problem 12
+            //string input = File.ReadAllText("../../../Datasets/customers.json");
+            //string result = ImportCustomers(context, input);
+            //Console.WriteLine(result);
+
+            //Problem 13
+            //string input = File.ReadAllText("../../../Datasets/sales.json");
+            //string result = ImportSales(context, input);
+            //Console.WriteLine(result);
+
+            //Problem 14
+            string json = GetOrderedCustomers(context);
+            EnsureDirectoryExist();
+            File.WriteAllText(ResultPath + "/ordered-customers.json", json);
+        }
+
+        //Problem 14
+        public static string GetOrderedCustomers(CarDealerContext context)
+        {
+            var customers = context.Customers
+                .OrderBy(x => x.BirthDate)
+                .ThenBy(x => x.IsYoungDriver)
+                .Select(x => new OrderedCustomerDto()
+                {
+                    Name = x.Name,
+                    BirthDate = x.BirthDate.ToString("dd/MM/yyyy"),
+                    IsYoungDriver = x.IsYoungDriver
+                })
+                .ToList();
+
+            var json = JsonConvert.SerializeObject(customers, Formatting.Indented);
+
+            return json;
+        }
+
+        //Problem 13
+        public static string ImportSales(CarDealerContext context, string inputJson)
+        {
+            List<Sale> sales = JsonConvert.DeserializeObject<List<Sale>>(inputJson);
+
+            context.Sales.AddRange(sales);
+            context.SaveChanges();
+
+            return $"Successfully imported {sales.Count}.";
         }
 
         //Problem 12
@@ -112,6 +154,13 @@ namespace CarDealer
             return $"Successfully imported {suppliers.Count}.";
         }
 
+        private static void EnsureDirectoryExist()
+        {
+            if (!Directory.Exists(ResultPath))
+            {
+                Directory.CreateDirectory(ResultPath);
+            }
+        }
         private static void InitializeMapper()
         {
             Mapper.Initialize(cfg =>
