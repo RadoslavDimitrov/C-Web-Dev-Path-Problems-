@@ -12,36 +12,39 @@ namespace ProductShop
 {
     public class StartUp
     {
+        private static string ResultPath = @"../../../Datasets/Results";
         public static void Main(string[] args)
         {
             ProductShopContext context = new ProductShopContext();
 
-            context.Database.EnsureDeleted();
-            context.Database.EnsureCreated();
+            //context.Database.EnsureDeleted();
+            //context.Database.EnsureCreated();
 
-            //Problem 1
-            var usersImport = File.ReadAllText("../../../Datasets/users.xml");
-
-           
-
-            ImportUsers(context, usersImport);
+            ////Problem 1
+            //var usersImport = File.ReadAllText("../../../Datasets/users.xml");
+            //ImportUsers(context, usersImport);
 
 
-            //Problem 2
-            var xmlInput = File.ReadAllText("../../../Datasets/products.xml");
-            var resultProduct = ImportProducts(context, xmlInput);
-            Console.WriteLine(resultProduct);
+            ////Problem 2
+            //var xmlInput = File.ReadAllText("../../../Datasets/products.xml");
+            //var resultProduct = ImportProducts(context, xmlInput);
+            //Console.WriteLine(resultProduct);
 
 
-            //Problem 3
-            var xmlCategory = File.ReadAllText("../../../Datasets/categories.xml");
-            var categoryResult = ImportCategories(context, xmlCategory);
-            Console.WriteLine(categoryResult);
+            ////Problem 3
+            //var xmlCategory = File.ReadAllText("../../../Datasets/categories.xml");
+            //var categoryResult = ImportCategories(context, xmlCategory);
+            //Console.WriteLine(categoryResult);
 
-            //Problem 4
-            var xmlCategoryProduct = File.ReadAllText("../../../Datasets/categories-products.xml");
-            var categoryProductResult = ImportCategoryProducts(context, xmlCategoryProduct);
-            Console.WriteLine(categoryProductResult);
+            ////Problem 4
+            //var xmlCategoryProduct = File.ReadAllText("../../../Datasets/categories-products.xml");
+            //var categoryProductResult = ImportCategoryProducts(context, xmlCategoryProduct);
+            //Console.WriteLine(categoryProductResult);
+
+            //Problem 5
+            EnsureDirectoryExist();
+            string xmlProducts = GetProductsInRange(context);
+            File.WriteAllText(ResultPath + "/products-in-range.xml", xmlProducts);
         }
 
         //Problem 5
@@ -57,11 +60,12 @@ namespace ProductShop
                 .Select(x => new ProductsInRangeDto
                 {
                     Name = x.Name,
-                    Price = x.Price
+                    Price = x.Price,
+                    BuyerFullName = x.Buyer.FirstName + " " + x.Buyer.LastName
                 })
                 .ToArray();
 
-            var result = XmlConverter.Serialize<ProductsInRangeDto>(products, rootElement);
+            var result = XmlConverter.Serialize(products, rootElement);
 
             return result;
         }
@@ -159,6 +163,14 @@ namespace ProductShop
             context.SaveChanges();
 
             return $"Successfully imported {usersAsObj.Count}";
+        }
+
+        private static void EnsureDirectoryExist()
+        {
+            if (!Directory.Exists(ResultPath))
+            {
+                Directory.CreateDirectory(ResultPath);
+            }
         }
     }
 }
