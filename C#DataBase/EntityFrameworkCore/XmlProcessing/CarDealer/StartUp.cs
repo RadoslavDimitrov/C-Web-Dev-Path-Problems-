@@ -17,14 +17,67 @@ namespace CarDealer
         {
             CarDealerContext context = new CarDealerContext();
 
-            //ResetDatabase(context);
+            ResetDatabase(context);
 
-            //var xmlSuppliers = File.ReadAllText(DatasetsPath + "suppliers.xml");
-            //ImportSuppliers(context, xmlSuppliers);
+            var xmlSuppliers = File.ReadAllText(DatasetsPath + "suppliers.xml");
+            ImportSuppliers(context, xmlSuppliers);
 
             var xmlParts = File.ReadAllText(DatasetsPath + "parts.xml");
-            System.Console.WriteLine(ImportParts(context, xmlParts));
+            ImportParts(context, xmlParts);
+
+            var xmlCars = File.ReadAllText(DatasetsPath + "cars.xml");
+            System.Console.WriteLine(ImportCars(context, xmlCars));
         }
+
+        //Problem 3
+        public static string ImportCars(CarDealerContext context, string inputXml)
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ImportCarsDto[]), new XmlRootAttribute("Cars"));
+
+            ImportCarsDto[] carsDtos = (ImportCarsDto[])xmlSerializer.Deserialize(new StringReader(inputXml));
+
+            var cars = new List<Car>();
+            var partCars = new List<PartCar>();
+
+            foreach (var carDto in carsDtos)
+            {
+                var car = new Car()
+                {
+                    Make = carDto.Make,
+                    Model = carDto.Model,
+                    TravelledDistance = carDto.TraveledDistance
+                };
+
+                var parts = carDto
+                    .Parts
+                    .Where(pc => context.Parts.Any(p => p.Id == pc.Id))
+                    .Select(p => p.Id)
+                    .Distinct();
+
+                foreach (var part in parts)
+                {
+                    PartCar partCar = new PartCar()
+                    {
+                        PartId = part,
+                        Car = car
+                    };
+
+                    partCars.Add(partCar);
+                }
+
+                cars.Add(car);
+
+            }
+
+            context.PartCars.AddRange(partCars);
+
+            context.Cars.AddRange(cars);
+
+            context.SaveChanges();
+
+            return $"Successfully imported {cars.Count}";
+        }
+
 
         //Problem 2
         public static string ImportParts(CarDealerContext context, string inputXml)
@@ -38,7 +91,7 @@ namespace CarDealer
 
             foreach (var dto in partsDto)
             {
-                if(context.Suppliers.Any(s => s.Id == dto.SupplierId))
+                if (context.Suppliers.Any(s => s.Id == dto.SupplierId))
                 {
                     Part part = new Part()
                     {
@@ -49,7 +102,7 @@ namespace CarDealer
                     };
 
                     parts.Add(part);
-                }               
+                }
             }
 
             context.Parts.AddRange(parts);
