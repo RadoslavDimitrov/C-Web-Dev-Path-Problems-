@@ -20,31 +20,107 @@ namespace ProductShop
             //context.Database.EnsureDeleted();
             //context.Database.EnsureCreated();
 
-            ////Problem 1
-            //var usersImport = File.ReadAllText("../../../Datasets/users.xml");
-            //ImportUsers(context, usersImport);
+            
+
+            //Problem 8
+            string xmlUsersAndProducts = GetUsersWithProducts(context);
+            File.WriteAllText(ResultPath + "/users-and-products.xml", xmlUsersAndProducts);
+        }
+
+        //Problem 8
+        public static string GetUsersWithProducts(ProductShopContext context)
+        {
+            const string rootElement = "Users";
 
 
-            ////Problem 2
-            //var xmlInput = File.ReadAllText("../../../Datasets/products.xml");
-            //var resultProduct = ImportProducts(context, xmlInput);
-            //Console.WriteLine(resultProduct);
 
+            var usersWithProducts = new UsersAndProductsDto()
+            {
+                Count = context.Users.Count(u => u.ProductsSold.Any(p => p.Buyer != null)),
+                Users = context.Users
+                        .ToArray()
+                        .Where(u => u.ProductsSold.Any(p => p.Buyer != null))
+                        .OrderByDescending(u => u.ProductsSold.Count)
+                        .Take(10)
+                        .Select(u => new UserDto()
+                        {
+                            FirstName = u.FirstName,
+                            LastName = u.LastName,
+                            Age = u.Age,
+                            SoldProducts = new SoldProductsDto()
+                            {
+                                Count = u.ProductsSold.Count(p => p.Buyer != null),
+                                Products = u.ProductsSold
+                                    .ToArray()
+                                    .Where(p => p.Buyer != null)
+                                    .Select(x => new SoldProductDto()
+                                    {
+                                        Name = x.Name,
+                                        Price = x.Price
+                                    })
+                                    .OrderByDescending(x => x.Price)
+                                    .ToArray()
+                            }
+                        })
+                        .ToArray()
 
-            ////Problem 3
-            //var xmlCategory = File.ReadAllText("../../../Datasets/categories.xml");
-            //var categoryResult = ImportCategories(context, xmlCategory);
-            //Console.WriteLine(categoryResult);
+            };
 
-            ////Problem 4
-            //var xmlCategoryProduct = File.ReadAllText("../../../Datasets/categories-products.xml");
-            //var categoryProductResult = ImportCategoryProducts(context, xmlCategoryProduct);
-            //Console.WriteLine(categoryProductResult);
+            var result = XmlConverter.Serialize(usersWithProducts, rootElement);
 
-            //Problem 5
-            EnsureDirectoryExist();
-            string xmlProducts = GetProductsInRange(context);
-            File.WriteAllText(ResultPath + "/products-in-range.xml", xmlProducts);
+            return result;
+        }
+
+        //Problem 7
+        public static string GetCategoriesByProductsCount(ProductShopContext context)
+        {
+            const string rootElement = "Categories";
+
+            var categories = context.Categories
+                .Select(x => new CategoryDto
+                {
+                    Name = x.Name,
+                    Count = x.CategoryProducts.Count,
+                    AveragePrice = x.CategoryProducts.Select(p => p.Product.Price).Average(),
+                    TotalRevenue = x.CategoryProducts.Select(p => p.Product.Price).Sum()
+                })
+                .OrderByDescending(x => x.Count)
+                .ThenBy(x => x.TotalRevenue)
+                .ToList();
+
+            var result = XmlConverter.Serialize(categories, rootElement);
+
+            return result;
+        }
+
+        //Problem 6
+        public static string GetSoldProducts(ProductShopContext context)
+        {
+            const string rootElement = "Users";
+
+            var users = context.Users
+                .Where(x => x.ProductsSold.Any(x => x.Buyer != null))
+                .OrderBy(x => x.LastName)
+                .ThenBy(x => x.FirstName)
+                .Select(x => new UsersWithSoldProductsDto
+                {
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    SoldProducts = x.ProductsSold
+                    .Where(p => p.Buyer != null)
+                    .Select(p => new SoldProductDto
+                    {
+                        Name = p.Name,
+                        Price = p.Price
+                    })
+                    .ToArray()
+                })
+                .Take(5)
+                .ToList();
+
+            var result = XmlConverter.Serialize(users, rootElement);
+
+            return result;
         }
 
         //Problem 5
