@@ -1,13 +1,18 @@
-﻿using CarDealer.Data;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using CarDealer.Data;
 using CarDealer.Dtos.Export;
 using CarDealer.Dtos.Import;
 using CarDealer.Models;
 using CarDealer.XmlHelper;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Xml.Serialization;
 
@@ -19,6 +24,16 @@ namespace CarDealer
         private const string ResultPath = DatasetsPath + @"/Results/";
         public static void Main(string[] args)
         {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<CarDealerProfile>();
+            });
+
+            Mapper mapper = new Mapper(config);
+            
+
+            //InitializeMapper();
+
             CarDealerContext context = new CarDealerContext();
 
             //ResetDatabase(context);
@@ -38,9 +53,118 @@ namespace CarDealer
             //var xmlSales = File.ReadAllText(DatasetsPath + "sales.xml");
             //Console.WriteLine(ImportSales(context, xmlSales));
 
-            var xml = GetLocalSuppliers(context);
+            var xml = GetSalesWithAppliedDiscount(context);
             EnsureDirectoryExist();
-            File.WriteAllText(ResultPath + "local-suppliers.xml", xml);
+            File.WriteAllText(ResultPath + "sales-discounts.xml", xml);
+        }
+
+        //Problem11
+        public static string GetSalesWithAppliedDiscount(CarDealerContext context)
+        {
+            var result = context.Sales
+                .Select(x => new ExportSaleDto
+                {
+                    Car = new ExportCarDto
+                    {
+                        Make = x.Car.Make,
+                        Model = x.Car.Model,
+                        TravelledDistance = x.Car.TravelledDistance,
+
+                    },
+                    Discount = x.Discount,
+                    CustomerName = x.Customer.Name,
+                    Price = x.Car.PartCars.Sum(p => p.Part.Price),
+                    PriceWithDiscount = x.Car.PartCars.Sum(p => p.Part.Price) -
+                            x.Car.PartCars.Sum(p => p.Part.Price) * x.Discount / 100
+
+                })
+                .ToArray();
+
+            var xmlResult = XmlConverter.Serialize(result, "sales");
+
+            return xmlResult;
+        }
+
+        //Problem 10
+
+        public static string GetTotalSalesByCustomer(CarDealerContext context)
+        {
+            //var customersDto = context.Customers
+            //    .Select(x => new ExportCustomerSalesDto
+            //    {
+            //        FullName = x.Name,
+            //        BoughtCars = x.Sales.Count,
+            //        SpendMoney = x.Sales.Sum(x => x.Car.PartCars.Sum(pc => pc.Part.Price))
+
+            //    })
+            //    .Where(x => x.BoughtCars >= 1)
+            //    .OrderByDescending(x => x.SpendMoney)
+            //    .ToArray();
+
+            var customers = context
+                .Customers
+                .Select(x => new ExportCustomerSalesDto()
+                {
+                    FullName = x.Name,
+                    BoughtCars = x.Sales.Count,
+                    SpendMoney = x.Sales.Sum(s => s.Car.PartCars.Sum(p => p.Part.Price))
+                })
+                .Where(c => c.BoughtCars >= 1)
+                .OrderByDescending(c => c.SpendMoney)
+                .ToArray();
+
+            const string rootAttribute = "customers";
+
+            XmlSerializer serializer = new XmlSerializer(typeof(ExportCustomerSalesDto[]), new XmlRootAttribute(rootAttribute));
+
+            StringBuilder sb = new StringBuilder();
+
+            var namespaces = new XmlSerializerNamespaces();
+            namespaces.Add("", "");
+
+            serializer.Serialize(new StringWriter(sb), customers, namespaces);
+
+            return sb.ToString().Trim();
+        }
+
+        //Problem 9
+
+        public static string GetCarsWithTheirListOfParts(CarDealerContext context)
+        {
+            const string rootAttribute = "cars";
+
+            var carsDto = context.Cars
+                .Select(x => new ExportCarWithPartsDto
+                {
+                    Make = x.Make,
+                    Model = x.Model,
+                    TravelledDistance = x.TravelledDistance,
+                    Parts = x.PartCars
+                    
+                    .Select(pc => new ExportPartsDto
+                    {
+                        Name = pc.Part.Name,
+                        Price = pc.Part.Price
+                    })
+                    .OrderByDescending(pc => pc.Price)
+                    .ToArray()
+                    
+                })
+                .OrderByDescending(x => x.TravelledDistance)
+                .ThenBy(x => x.Model)
+                .Take(5)
+                .ToArray();
+
+            XmlSerializer serializer = new XmlSerializer(typeof(ExportCarWithPartsDto[]), new XmlRootAttribute(rootAttribute));
+
+            StringBuilder sb = new StringBuilder();
+
+            var namespaces = new XmlSerializerNamespaces();
+            namespaces.Add("", "");
+
+            serializer.Serialize(new StringWriter(sb), carsDto, namespaces);
+
+            return sb.ToString().Trim();
         }
 
         //Problem 8
@@ -201,46 +325,80 @@ namespace CarDealer
 
             ImportCarsDto[] carsDtos = (ImportCarsDto[])xmlSerializer.Deserialize(new StringReader(inputXml));
 
-            var cars = new List<Car>();
-            var partCars = new List<PartCar>();
+            List<Car> cars = new List<Car>();
 
             foreach (var carDto in carsDtos)
             {
-                var car = new Car()
+                var parts = carDto.Parts.Select(s => s.Id).Distinct().ToArray();
+                var realParts = parts.Where(id => context.Parts.Any(i => i.Id == id));
+
+                var car = new Car
                 {
                     Make = carDto.Make,
                     Model = carDto.Model,
-                    TravelledDistance = carDto.TraveledDistance
+                    TravelledDistance = carDto.TraveledDistance,
+                    PartCars = realParts.Select(p => new PartCar
+                    {
+                        PartId = p
+                    })
+                    .ToArray()
                 };
 
-                var parts = carDto
-                    .Parts
-                    .Where(pc => context.Parts.Any(p => p.Id == pc.Id))
-                    .Select(p => p.Id)
-                    .Distinct();
-
-                foreach (var part in parts)
-                {
-                    PartCar partCar = new PartCar()
-                    {
-                        PartId = part,
-                        Car = car
-                    };
-
-                    partCars.Add(partCar);
-                }
-
                 cars.Add(car);
-
             }
 
-            context.PartCars.AddRange(partCars);
-
             context.Cars.AddRange(cars);
-
             context.SaveChanges();
 
             return $"Successfully imported {cars.Count}";
+
+
+
+            //const string rootAttribute = "Cars";
+            //XmlSerializer xmlSerializer = new XmlSerializer(typeof(ImportCarsDto[]), new XmlRootAttribute(rootAttribute));
+
+            //ImportCarsDto[] carsDtos = (ImportCarsDto[])xmlSerializer.Deserialize(new StringReader(inputXml));
+
+            //var cars = new List<Car>();
+            //var partCars = new List<PartCar>();
+
+            //foreach (var carDto in carsDtos)
+            //{
+            //    var car = new Car()
+            //    {
+            //        Make = carDto.Make,
+            //        Model = carDto.Model,
+            //        TravelledDistance = carDto.TraveledDistance
+            //    };
+
+            //    var parts = carDto
+            //        .Parts
+            //        .Where(pc => context.Parts.Any(p => p.Id == pc.Id))
+            //        .Select(p => p.Id)
+            //        .Distinct();
+
+            //    foreach (var part in parts)
+            //    {
+            //        PartCar partCar = new PartCar()
+            //        {
+            //            PartId = part,
+            //            Car = car
+            //        };
+
+            //        partCars.Add(partCar);
+            //    }
+
+            //    cars.Add(car);
+
+            //}
+
+            //context.PartCars.AddRange(partCars);
+
+            //context.Cars.AddRange(cars);
+
+            //context.SaveChanges();
+
+            //return $"Successfully imported {cars.Count}";
         }
 
 
@@ -303,6 +461,11 @@ namespace CarDealer
             return $"Successfully imported {suppliers.Count}";
         }
 
+        //private static void InitializeMapper()
+        //{
+        //    Mapper.Initialize(cfg => { cfg.AddProfile<CarDealerProfile>(); });
+        //}
+
         private static void ResetDatabase(CarDealerContext context)
         {
             context.Database.EnsureDeleted();
@@ -316,5 +479,8 @@ namespace CarDealer
                 Directory.CreateDirectory(ResultPath);
             }
         }
+
+       
+
     }
 }

@@ -6,6 +6,8 @@ using System.Xml.Serialization;
 
 namespace CarDealer.Dtos.Import
 {
+    
+
     [XmlType("Car")]
     public class ImportCarsDto
     {
@@ -18,6 +20,7 @@ namespace CarDealer.Dtos.Import
         [XmlArray("parts")]
         public PartCarsDto[] Parts { get; set; }
     }
+
 }
 
 
