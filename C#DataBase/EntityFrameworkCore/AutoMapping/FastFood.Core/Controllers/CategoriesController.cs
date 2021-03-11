@@ -1,11 +1,8 @@
 ﻿namespace FastFood.Core.Controllers
 {
     using System;
-    using System.Linq;
     using AutoMapper;
-    using AutoMapper.QueryableExtensions;
     using Data;
-    using FastFood.Models;
     using Microsoft.AspNetCore.Mvc;
     using ViewModels.Categories;
 
@@ -28,27 +25,12 @@
         [HttpPost]
         public IActionResult Create(CreateCategoryInputModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return RedirectToAction("Error", "Home");
-            }
-
-            var category = this.mapper.Map<Category>(model);
-
-            context.Categories.Add(category);
-
-            context.SaveChanges();
-
-            return RedirectToAction("All", "Categories");
+            throw new NotImplementedException();
         }
 
         public IActionResult All()
         {
-            var categories = this.context.Categories
-                .ProjectTo<CategoryAllViewModel>(mapper.ConfigurationProvider)
-                .ToList();
-
-            return this.View(categories);
+            throw new NotImplementedException();
         }
     }
 }
