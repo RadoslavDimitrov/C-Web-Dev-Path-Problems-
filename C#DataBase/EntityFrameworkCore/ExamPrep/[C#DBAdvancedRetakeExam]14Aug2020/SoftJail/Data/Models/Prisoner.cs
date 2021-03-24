@@ -29,7 +29,6 @@ namespace SoftJail.Data.Models
         [Required]
         public DateTime IncarcerationDate { get; set; }
 
-        [Required]
         public DateTime? ReleaseDate { get; set; }
 
         public decimal? Bail { get; set; }
