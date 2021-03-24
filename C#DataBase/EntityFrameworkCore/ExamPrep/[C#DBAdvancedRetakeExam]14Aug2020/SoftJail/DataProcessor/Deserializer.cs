@@ -8,6 +8,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Globalization;
     using System.Text;
 
     public class Deserializer
@@ -102,7 +103,72 @@
 
         public static string ImportPrisonersMails(SoftJailDbContext context, string jsonString)
         {
-            throw new NotImplementedException();
+            var PrisonersDtos = JsonConvert.DeserializeObject<ImportPrisonerDto[]>(jsonString);
+
+            StringBuilder sb = new StringBuilder();
+
+            List<Prisoner> prisoners = new List<Prisoner>();
+
+            foreach (var PrisonerDto in PrisonersDtos)
+            {
+                if (!IsValid(PrisonerDto))
+                {
+                    sb.AppendLine("Invalid Data");
+                    continue;
+                }
+
+                bool isInvalidMail = false;
+
+                List<Mail> mails = new List<Mail>();
+
+                foreach (var mailDto in PrisonerDto.Mails)
+                {
+                    if (!IsValid(mailDto))
+                    {
+                        sb.AppendLine("Invalid Data");
+                        isInvalidMail = true;
+                        break;
+                    }
+
+                    Mail mail = new Mail()
+                    {
+                        Address = mailDto.Address,
+                        Description = mailDto.Description,
+                        Sender = mailDto.Sender
+                    };
+
+                    mails.Add(mail);
+                }
+
+                if (isInvalidMail)
+                {
+                    continue;
+                }
+
+                Prisoner prisoner = new Prisoner()
+                {
+                    FullName = PrisonerDto.FullName,
+                    Age = PrisonerDto.Age,
+                    Nickname = PrisonerDto.Nickname,
+                    IncarcerationDate = DateTime.ParseExact(PrisonerDto.IncarcerationDate, "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    CellId = PrisonerDto.CellId,
+                    Bail = PrisonerDto.Bail,
+                    Mails = mails
+                };
+
+                if(PrisonerDto.ReleaseDate != null)
+                {
+                    prisoner.ReleaseDate = DateTime.ParseExact(PrisonerDto.ReleaseDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                }
+
+                sb.AppendLine($"Imported {prisoner.FullName} {prisoner.Age} years old");
+
+            }
+
+            context.Prisoners.AddRange(prisoners);
+            context.SaveChanges();
+
+            return sb.ToString().TrimEnd();
         }
 
         public static string ImportOfficersPrisoners(SoftJailDbContext context, string xmlString)
